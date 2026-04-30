@@ -41,7 +41,7 @@
         setInterval(function() {
           const banner = document.querySelector('.goog-te-banner-frame');
           if (banner) banner.style.display = 'none';
-          document.body.style.top = '0px';
+          if (document.body) document.body.style.top = '0px';
         }, 500);
       })();
     </script>
