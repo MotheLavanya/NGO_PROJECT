@@ -7,21 +7,12 @@
     <title>Hope Rise Foundation | NGO</title>
     <script type="text/javascript">
       function googleTranslateElementInit() {
-        let attempts = 0;
-        const checkExist = setInterval(function() {
-          const el = document.getElementById('google_translate_element');
-          if (el) {
-            new google.translate.TranslateElement({
-              pageLanguage: 'en',
-              includedLanguages: 'en,te,hi,ml,ta,kn',
-              layout: google.translate.TranslateElement.InlineLayout.SIMPLE,
-              autoDisplay: false
-            }, 'google_translate_element');
-            clearInterval(checkExist);
-          }
-          attempts++;
-          if (attempts > 50) clearInterval(checkExist); // Stop after 5 seconds
-        }, 100);
+        new google.translate.TranslateElement({
+          pageLanguage: 'en',
+          includedLanguages: 'en,te,hi,ur,ta,ml,kn',
+          layout: google.translate.TranslateElement.InlineLayout.SIMPLE,
+          autoDisplay: false
+        }, 'google_translate_element');
       }
 
       // Aggressively hide Google Translate UI

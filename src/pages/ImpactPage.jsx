@@ -2,10 +2,13 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { Quote, Star, ArrowRight, Heart } from 'lucide-react';
 import AnimatedSection from '../components/AnimatedSection';
+import PageHero from '../components/PageHero';
 
 import eduImg from '../assets/images/education.png';
 import healthImg from '../assets/images/healthcare.png';
 import waterImg from '../assets/images/water.png';
+
+import impactHeroImg from '../assets/images/impact_hero.png';
 
 const ImpactPage = () => {
   const stories = [
@@ -42,12 +45,12 @@ const ImpactPage = () => {
       exit={{ opacity: 0 }}
       className="impact-page"
     >
-      <section className="page-header" style={{ background: 'var(--color-primary-soft)' }}>
-        <div className="container">
-          <h1 className="header-title">Impact Stories</h1>
-          <p className="header-subtitle">Real people, real change. Witness the impact of your support.</p>
-        </div>
-      </section>
+      <PageHero 
+        title="Impact Stories"
+        subtitle="Real people, real change. Witness the tangible impact of your continued support and dedication."
+        bgImage={impactHeroImg}
+        showCTA={false}
+      />
 
       <section className="section">
         <div className="container">
@@ -129,11 +132,21 @@ const ImpactPage = () => {
           align-items: center;
         }
 
-        .story-img img {
-          width: 100%;
-          height: 400px;
-          object-fit: cover;
+        .story-img {
+          position: relative;
+          height: 320px;
           border-radius: var(--radius-lg);
+          overflow: hidden;
+        }
+
+        .story-img img {
+          position: absolute;
+          inset: 0;
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+          border-radius: 0;
+          display: block;
         }
 
         .story-content h3 {

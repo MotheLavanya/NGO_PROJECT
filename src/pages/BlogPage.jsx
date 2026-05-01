@@ -2,11 +2,14 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { Calendar, User, ArrowRight, Tag } from 'lucide-react';
 import AnimatedSection from '../components/AnimatedSection';
+import PageHero from '../components/PageHero';
 
 import eduImg from '../assets/images/education.png';
 import healthImg from '../assets/images/healthcare.png';
 import waterImg from '../assets/images/water.png';
 import heroImg from '../assets/images/hero.png';
+
+import blogHeroImg from '../assets/images/blog_hero.png';
 
 const BlogPage = () => {
   const posts = [
@@ -62,12 +65,12 @@ const BlogPage = () => {
       exit={{ opacity: 0 }}
       className="blog-page"
     >
-      <section className="page-header" style={{ background: 'var(--color-primary-soft)' }}>
-        <div className="container">
-          <h1 className="header-title">Latest News & Stories</h1>
-          <p className="header-subtitle">Stay updated with our activities and stories from the field.</p>
-        </div>
-      </section>
+      <PageHero 
+        title="Latest News & Stories"
+        subtitle="Stay updated with our on-ground activities, success stories, and upcoming campaigns."
+        bgImage={blogHeroImg}
+        showCTA={false}
+      />
 
       <section className="section">
         <div className="container">
@@ -157,13 +160,18 @@ const BlogPage = () => {
 
         .blog-img {
           position: relative;
-          height: 250px;
+          height: 220px;
+          overflow: hidden;
         }
 
         .blog-img img {
+          position: absolute;
+          inset: 0;
           width: 100%;
           height: 100%;
           object-fit: cover;
+          display: block;
+          border-radius: 0;
         }
 
         .blog-tag {

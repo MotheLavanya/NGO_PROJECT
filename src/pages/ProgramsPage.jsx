@@ -2,6 +2,7 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { BookOpen, Activity, Droplets, Leaf, GraduationCap, HeartPulse } from 'lucide-react';
 import AnimatedSection from '../components/AnimatedSection';
+import PageHero from '../components/PageHero';
 
 import eduImg from '../assets/images/education.png';
 import healthImg from '../assets/images/healthcare.png';
@@ -68,12 +69,12 @@ const ProgramsPage = () => {
       exit={{ opacity: 0 }}
       className="programs-page"
     >
-      <section className="page-header dark" style={{ background: '#0F172A', color: 'white' }}>
-        <div className="container">
-          <h1 className="header-title" style={{ color: 'white' }}>Our Programs</h1>
-          <p className="header-subtitle" style={{ color: '#94A3B8' }}>Systemic solutions for community empowerment.</p>
-        </div>
-      </section>
+      <PageHero 
+        title="Our Programs"
+        subtitle="Systemic solutions for community empowerment. We focus on education, healthcare, and sustainable living."
+        bgImage="https://images.unsplash.com/photo-1509062522246-3755977927d7?auto=format&fit=crop&q=80&w=1600"
+        showCTA={true}
+      />
 
       <section className="section">
         <div className="container">

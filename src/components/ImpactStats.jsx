@@ -45,50 +45,53 @@ const ImpactStats = ({ stats }) => {
         .stats-grid {
           display: grid;
           grid-template-columns: repeat(4, 1fr);
-          gap: 2rem;
-          margin-top: -60px; /* Overlap with hero */
+          gap: 1.5rem;
           position: relative;
           z-index: 10;
         }
 
         .stat-card {
-          background: white;
-          padding: 2.5rem 1.5rem;
-          border-radius: var(--radius-lg);
-          box-shadow: var(--shadow-lg);
+          background: #ffffff;
+          padding: 2.2rem 1.5rem;
+          border-radius: 16px;
+          box-shadow: 0 20px 40px rgba(0,0,0,0.15);
           display: flex;
           flex-direction: column;
           align-items: center;
           text-align: center;
-          transition: var(--transition);
+          transition: transform 0.3s ease;
+          border: 1px solid rgba(255,255,255,0.1);
         }
 
         .stat-card:hover {
-          transform: translateY(-10px);
+          transform: translateY(-8px);
         }
 
         .stat-icon-wrapper {
-          width: 60px;
-          height: 60px;
-          background: var(--color-primary-soft);
-          color: var(--color-primary);
+          width: 56px;
+          height: 56px;
+          background: #F0FDF4; /* Very light green */
+          color: #16A34A;
           display: flex;
           align-items: center;
           justify-content: center;
           border-radius: 50%;
-          margin-bottom: 1.5rem;
+          margin-bottom: 1.2rem;
         }
 
         .stat-value {
           font-size: 2.2rem;
-          color: var(--color-text-main);
-          margin-bottom: 0.5rem;
+          color: #0F172A; /* Deep Navy/Black for high contrast */
+          font-weight: 800;
+          margin-bottom: 4px;
+          line-height: 1.1;
         }
 
         .stat-label {
-          color: var(--color-text-muted);
-          font-weight: 500;
-          font-size: 1rem;
+          color: #475569; /* Slate for modern look */
+          font-weight: 600;
+          font-size: 0.9rem;
+          letter-spacing: 0.2px;
         }
 
         @media (max-width: 1024px) {

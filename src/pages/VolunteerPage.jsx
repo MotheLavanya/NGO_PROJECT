@@ -2,6 +2,7 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { Users, BookOpen, Heart, MessageSquare, ArrowRight, CheckCircle } from 'lucide-react';
 import AnimatedSection from '../components/AnimatedSection';
+import PageHero from '../components/PageHero';
 import heroImg from '../assets/images/hero.png';
 
 const VolunteerPage = () => {
@@ -55,12 +56,12 @@ const VolunteerPage = () => {
       exit={{ opacity: 0 }}
       className="volunteer-page"
     >
-      <section className="page-header" style={{ background: 'var(--color-accent-soft)' }}>
-        <div className="container">
-          <h1 className="header-title">Join the Movement</h1>
-          <p className="header-subtitle">Your time and skills can change lives. Become a part of Hope Rise today.</p>
-        </div>
-      </section>
+      <PageHero 
+        title="Join the Movement"
+        subtitle="Your time, passion, and skills can change a life. Become a Hope Rise volunteer today and be the difference."
+        bgImage="https://images.unsplash.com/photo-1593113512648-5c7ce1a5470c?auto=format&fit=crop&q=80&w=1600"
+        showCTA={false}
+      />
 
       <section className="section">
         <div className="container grid-2 align-center">

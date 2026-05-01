@@ -92,8 +92,14 @@ const Footer = () => {
         }
 
         .footer-brand .logo {
-          font-size: 1.8rem;
-          margin-bottom: 1.5rem;
+          font-family: var(--font-heading);
+          font-weight: 700;
+          font-size: 24px;
+          color: var(--color-text-heading);
+          display: flex;
+          align-items: center;
+          gap: 8px;
+          margin-bottom: 24px;
         }
 
         .footer-tagline {

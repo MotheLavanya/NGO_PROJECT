@@ -1,7 +1,86 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { Menu, X, Heart, ChevronDown } from 'lucide-react';
+import { Menu, X, Heart, Globe, ChevronDown } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
+
+const LANGUAGES = [
+  { code: 'en', label: 'English', flag: '🇺🇸' },
+  { code: 'te', label: 'తెలుగు', flag: '🇮🇳' },
+  { code: 'hi', label: 'हिन्दी', flag: '🇮🇳' },
+  { code: 'ur', label: 'اردو', flag: '🇵🇰' },
+  { code: 'ta', label: 'தமிழ்', flag: '🇮🇳' },
+];
+
+const LanguageSelector = () => {
+  const [open, setOpen] = useState(false);
+  const [selected, setSelected] = useState(LANGUAGES[0]);
+  const ref = useRef(null);
+
+  // Close on outside click
+  useEffect(() => {
+    const handler = (e) => { if (ref.current && !ref.current.contains(e.target)) setOpen(false); };
+    document.addEventListener('mousedown', handler);
+    return () => document.removeEventListener('mousedown', handler);
+  }, []);
+
+  const handleSelect = (lang) => {
+    setSelected(lang);
+    setOpen(false);
+    
+    // Trigger Google Translate engine
+    const googleCombo = document.querySelector('.goog-te-combo');
+    if (googleCombo) {
+      googleCombo.value = lang.code;
+      googleCombo.dispatchEvent(new Event('change'));
+    } else {
+      // Fallback if not ready, try again in 500ms
+      setTimeout(() => {
+        const retryCombo = document.querySelector('.goog-te-combo');
+        if (retryCombo) {
+          retryCombo.value = lang.code;
+          retryCombo.dispatchEvent(new Event('change'));
+        }
+      }, 500);
+    }
+  };
+
+  return (
+    <div className="lang-selector" ref={ref}>
+      {/* Hidden container for Google Translate to initialize */}
+      <div id="google_translate_element" style={{ display: 'none' }}></div>
+      
+      <button className="lang-trigger" onClick={() => setOpen(!open)}>
+        <Globe size={15} />
+        <span>{selected.flag} {selected.label}</span>
+        <ChevronDown size={13} className={`lang-chevron ${open ? 'open' : ''}`} />
+      </button>
+
+      <AnimatePresence>
+        {open && (
+          <motion.div
+            className="lang-dropdown"
+            initial={{ opacity: 0, y: -8, scale: 0.97 }}
+            animate={{ opacity: 1, y: 0, scale: 1 }}
+            exit={{ opacity: 0, y: -8, scale: 0.97 }}
+            transition={{ duration: 0.15 }}
+          >
+            {LANGUAGES.map((lang) => (
+              <button
+                key={lang.code}
+                className={`lang-option ${selected.code === lang.code ? 'lang-active' : ''}`}
+                onClick={() => handleSelect(lang)}
+              >
+                <span className="lang-flag">{lang.flag}</span>
+                <span>{lang.label}</span>
+                {selected.code === lang.code && <span className="lang-check">✓</span>}
+              </button>
+            ))}
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </div>
+  );
+};
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -9,17 +88,12 @@ const Navbar = () => {
   const location = useLocation();
 
   useEffect(() => {
-    const handleScroll = () => {
-      setScrolled(window.scrollY > 50);
-    };
+    const handleScroll = () => { setScrolled(window.scrollY > 50); };
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  // Close mobile menu on route change
-  useEffect(() => {
-    setIsOpen(false);
-  }, [location]);
+  useEffect(() => { setIsOpen(false); }, [location]);
 
   const navLinks = [
     { name: 'Home', path: '/' },
@@ -51,9 +125,7 @@ const Navbar = () => {
             </Link>
           ))}
           <div className="nav-actions">
-            {/* The single Translate widget container */}
-            <div id="google_translate_element" className="translate-widget"></div>
-            
+            <LanguageSelector />
             <Link to="/donate" className="btn btn-primary nav-cta">
               Donate <Heart size={16} fill="white" />
             </Link>
@@ -85,6 +157,10 @@ const Navbar = () => {
                   {link.name}
                 </Link>
               ))}
+              {/* Language selector in mobile menu too */}
+              <div style={{ padding: '4px 0' }}>
+                <LanguageSelector />
+              </div>
               <Link to="/donate" className="btn btn-primary mobile-cta">
                 Donate Now
               </Link>
@@ -108,7 +184,7 @@ const Navbar = () => {
         }
 
         .fixed-nav.scrolled {
-          background: rgba(255, 255, 255, 0.85);
+          background: rgba(255, 255, 255, 0.95);
           backdrop-filter: blur(10px);
           box-shadow: var(--shadow-sm);
           height: 70px;
@@ -124,37 +200,32 @@ const Navbar = () => {
         .logo {
           display: flex;
           align-items: center;
-          gap: 10px;
+          gap: 8px;
           font-family: var(--font-heading);
-          font-weight: 800;
-          font-size: 1.5rem;
-          color: var(--color-text-main);
+          font-weight: 700;
+          font-size: 24px;
+          color: var(--color-text-heading);
         }
 
-        .logo-icon {
-          color: var(--color-primary);
-        }
-
-        .logo-accent {
-          color: var(--color-primary);
-        }
+        .logo-icon { color: var(--color-primary); }
+        .logo-accent { color: var(--color-primary); }
 
         .desktop-links {
           display: flex;
           align-items: center;
-          gap: 2rem;
+          gap: 28px;
         }
 
         .nav-actions {
           display: flex;
           align-items: center;
-          gap: 1rem;
+          gap: 12px;
         }
 
         .nav-link {
-          font-size: 0.95rem;
+          font-size: 14px;
           font-weight: 500;
-          color: var(--color-text-muted);
+          color: var(--color-text-main);
           position: relative;
         }
 
@@ -165,7 +236,7 @@ const Navbar = () => {
         .nav-link.active::after {
           content: '';
           position: absolute;
-          bottom: -5px;
+          bottom: -4px;
           left: 0;
           width: 100%;
           height: 2px;
@@ -173,17 +244,98 @@ const Navbar = () => {
           border-radius: 2px;
         }
 
-        .nav-cta {
-          padding: 10px 20px;
-          font-size: 0.9rem;
+        /* ── Language Selector ── */
+        .lang-selector {
+          position: relative;
+        }
+
+        .lang-trigger {
+          display: inline-flex;
+          align-items: center;
+          gap: 6px;
+          padding: 7px 12px;
+          border-radius: var(--radius-full);
+          border: 1px solid var(--color-border);
+          background: var(--color-white);
+          color: var(--color-text-main);
+          font-size: 13px;
+          font-weight: 600;
+          font-family: var(--font-body);
+          cursor: pointer;
+          transition: var(--transition);
           white-space: nowrap;
         }
 
+        .lang-trigger:hover {
+          border-color: var(--color-primary);
+          color: var(--color-primary);
+          background: var(--color-primary-light);
+        }
+
+        .lang-chevron {
+          transition: transform 0.2s ease;
+        }
+
+        .lang-chevron.open {
+          transform: rotate(180deg);
+        }
+
+        .lang-dropdown {
+          position: absolute;
+          top: calc(100% + 8px);
+          right: 0;
+          min-width: 160px;
+          background: var(--color-white);
+          border: 1px solid var(--color-border);
+          border-radius: var(--radius-md);
+          box-shadow: var(--shadow-lg);
+          overflow: hidden;
+          z-index: 999;
+        }
+
+        .lang-option {
+          display: flex;
+          align-items: center;
+          gap: 10px;
+          width: 100%;
+          padding: 10px 14px;
+          background: none;
+          border: none;
+          font-family: var(--font-body);
+          font-size: 13px;
+          font-weight: 500;
+          color: var(--color-text-main);
+          cursor: pointer;
+          text-align: left;
+          transition: background 0.15s;
+        }
+
+        .lang-option:hover {
+          background: var(--color-bg-subtle);
+          color: var(--color-primary);
+        }
+
+        .lang-active {
+          background: var(--color-primary-light);
+          color: var(--color-primary);
+          font-weight: 700;
+        }
+
+        .lang-flag { font-size: 16px; }
+
+        .lang-check {
+          margin-left: auto;
+          color: var(--color-primary);
+          font-size: 12px;
+          font-weight: 700;
+        }
+
+        /* ── Mobile ── */
         .mobile-toggle {
           display: none;
           background: none;
           border: none;
-          color: var(--color-text-main);
+          color: var(--color-text-heading);
           cursor: pointer;
         }
 
@@ -192,7 +344,7 @@ const Navbar = () => {
           top: 100%;
           left: 0;
           width: 100%;
-          background: white;
+          background: var(--color-white);
           box-shadow: var(--shadow-md);
           overflow: hidden;
         }
@@ -200,94 +352,40 @@ const Navbar = () => {
         .mobile-nav-links {
           display: flex;
           flex-direction: column;
-          padding: 2rem 1.5rem;
-          gap: 1.5rem;
+          padding: 24px;
+          gap: 16px;
         }
 
         .mobile-link {
-          font-size: 1.1rem;
+          font-size: 17px;
           font-weight: 600;
-          color: var(--color-text-main);
+          color: var(--color-text-heading);
         }
 
-        .mobile-link.active {
-          color: var(--color-primary);
-        }
+        .mobile-link.active { color: var(--color-primary); }
 
         .mobile-cta {
           width: 100%;
-          margin-top: 1rem;
+          margin-top: 8px;
         }
 
         @media (max-width: 1150px) {
-          .desktop-links { gap: 1rem; }
-          .nav-actions { gap: 0.5rem; }
+          .desktop-links { gap: 16px; }
+          .nav-actions { gap: 12px; }
         }
 
         @media (max-width: 1024px) {
           .desktop-links { display: none; }
-          .mobile-toggle { display: block; }
+          .mobile-toggle { display: flex; align-items: center; justify-content: center; }
+          .nav-container { height: 70px; }
         }
 
-        .translate-widget {
-          min-width: 140px;
-        }
-      `}</style>
-      <style>{`
-        /* Hide Google Translate Banner and UI elements */
-        iframe.goog-te-banner-frame {
-          display: none !important;
-        }
-        body {
-          top: 0px !important;
-        }
-        #goog-gt-tt, .goog-te-balloon-frame, .goog-tooltip {
-          display: none !important;
-        }
-        .goog-text-highlight {
-          background-color: transparent !important;
-          box-shadow: none !important;
-          box-sizing: border-box !important;
-          border: none !important;
-        }
-        .goog-te-gadget-simple {
-          background-color: rgba(255, 255, 255, 0.5) !important;
-          border: 1px solid rgba(13, 148, 136, 0.2) !important;
-          padding: 6px 10px !important;
-          border-radius: 20px !important;
-          font-family: inherit !important;
-          font-size: 0.8rem !important;
-          display: flex !important;
-          align-items: center !important;
-          gap: 4px !important;
-          cursor: pointer !important;
-          transition: all 0.3s ease !important;
-        }
-        .goog-te-gadget-simple:hover {
-          background-color: white !important;
-          border-color: var(--color-primary) !important;
-        }
-        .goog-te-gadget-icon {
-          display: none !important;
-        }
-        .goog-te-menu-value {
-          margin: 0 !important;
-          display: flex !important;
-          align-items: center !important;
-          gap: 2px !important;
-          color: var(--color-text-main) !important;
-          font-weight: 600 !important;
-        }
-        .goog-te-menu-value span {
-          color: var(--color-primary) !important;
-        }
-        .goog-te-menu-value:after {
-          content: '▼';
-          font-size: 8px;
-          margin-left: 2px;
-        }
-        .goog-te-menu-value img {
-          display: none !important;
+        @media (max-width: 480px) {
+          .nav-container { padding: 0 16px; }
+          .logo-text { font-size: 18px; }
+          .mobile-menu { border-top: 1px solid var(--color-border); }
+          .mobile-nav-links { padding: 32px 20px; gap: 20px; }
+          .mobile-link { font-size: 18px; }
         }
       `}</style>
     </nav>

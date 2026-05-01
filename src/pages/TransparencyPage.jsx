@@ -2,6 +2,7 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { FileText, Download, PieChart, ShieldCheck, CheckCircle, ExternalLink } from 'lucide-react';
 import AnimatedSection from '../components/AnimatedSection';
+import PageHero from '../components/PageHero';
 
 const TransparencyPage = () => {
   const reports = [
@@ -18,12 +19,12 @@ const TransparencyPage = () => {
       exit={{ opacity: 0 }}
       className="transparency-page"
     >
-      <section className="page-header" style={{ background: '#0F172A', color: 'white' }}>
-        <div className="container">
-          <h1 className="header-title" style={{ color: 'white' }}>Transparency & Trust</h1>
-          <p className="header-subtitle" style={{ color: '#94A3B8' }}>Our commitment to financial integrity and measurable impact.</p>
-        </div>
-      </section>
+      <PageHero 
+        title="Transparency & Trust"
+        subtitle="We believe in open books and measurable impact. Review our financials and see exactly where your money goes."
+        bgImage="https://images.unsplash.com/photo-1554224155-8d04cb21cd6c?auto=format&fit=crop&q=80&w=1600"
+        showCTA={false}
+      />
 
       <section className="section">
         <div className="container grid-2 align-center">

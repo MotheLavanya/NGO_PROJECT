@@ -3,6 +3,7 @@ import { motion } from 'framer-motion';
 import { Mail, Phone, MapPin, Send, CheckCircle } from 'lucide-react';
 import { Facebook, Twitter, Instagram, Linkedin } from '../components/BrandIcons';
 import AnimatedSection from '../components/AnimatedSection';
+import PageHero from '../components/PageHero';
 
 const ContactPage = () => {
   const [isSubmitted, setIsSubmitted] = useState(false);
@@ -24,12 +25,12 @@ const ContactPage = () => {
       exit={{ opacity: 0 }}
       className="contact-page"
     >
-      <section className="page-header" style={{ background: 'var(--color-primary-soft)' }}>
-        <div className="container">
-          <h1 className="header-title">Get in Touch</h1>
-          <p className="header-subtitle">Have questions or want to partner with us? We'd love to hear from you.</p>
-        </div>
-      </section>
+      <PageHero 
+        title="Get in Touch"
+        subtitle="Have questions, want to partner with us, or need assistance? We are always here to listen and help."
+        bgImage="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&q=80&w=1600"
+        showCTA={false}
+      />
 
       <section className="section">
         <div className="container grid-2">

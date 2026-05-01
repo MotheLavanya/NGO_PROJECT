@@ -20,9 +20,36 @@ import ContactPage from './pages/ContactPage';
 import PrivacyPage from './pages/PrivacyPage';
 import TermsPage from './pages/TermsPage';
 
+import { useLocation } from 'react-router-dom';
+
+const TitleManager = () => {
+  const location = useLocation();
+
+  React.useEffect(() => {
+    const path = location.pathname;
+    let title = 'Hope Rise Foundation | Empowering Communities';
+    
+    if (path === '/about') title = 'About Us | Hope Rise Foundation';
+    if (path === '/programs') title = 'Our Programs | Hope Rise Foundation';
+    if (path === '/impact') title = 'Impact Stories | Hope Rise Foundation';
+    if (path === '/donate') title = 'Donate Now | Hope Rise Foundation';
+    if (path === '/volunteer') title = 'Join as Volunteer | Hope Rise Foundation';
+    if (path === '/blog') title = 'Latest News | Hope Rise Foundation';
+    if (path === '/contact') title = 'Contact Us | Hope Rise Foundation';
+    if (path === '/privacy') title = 'Privacy Policy | Hope Rise Foundation';
+    if (path === '/terms') title = 'Terms of Use | Hope Rise Foundation';
+    if (path === '/transparency') title = 'Transparency & Accountability | Hope Rise Foundation';
+
+    document.title = title;
+  }, [location]);
+
+  return null;
+};
+
 function App() {
   return (
     <Router>
+      <TitleManager />
       <ScrollToTop />
       <Navbar />
       <AnimatePresence mode="wait">
