@@ -118,7 +118,7 @@ img { max-width: 100%; display: block; border-radius: var(--radius-sm); }
 }
 
 .section {
-  padding: 48px 0;
+  padding: 32px 0;
 }
 
 .section-bg {
@@ -128,29 +128,29 @@ img { max-width: 100%; display: block; border-radius: var(--radius-sm); }
 .grid-2 {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  gap: 32px;
+  gap: 24px;
 }
 
 .grid-3 {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 32px;
+  gap: 24px;
 }
 
 .grid-4 {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  gap: 24px;
+  gap: 16px;
 }
 
 @media (max-width: 1024px) {
   .grid-3, .grid-4 { grid-template-columns: repeat(2, 1fr); }
-  .section { padding: 40px 0; }
+  .section { padding: 24px 0; }
 }
 
 @media (max-width: 768px) {
   .grid-2, .grid-3, .grid-4 { grid-template-columns: 1fr; }
-  .section { padding: 32px 0; }
+  .section { padding: 20px 0; }
   h1 { font-size: 36px; }
   h2 { font-size: 28px; }
 }
@@ -162,14 +162,14 @@ img { max-width: 100%; display: block; border-radius: var(--radius-sm); }
   align-items: center;
   justify-content: center;
   gap: 8px;
-  padding: 12px 24px;
+  padding: 10px 20px;
   border-radius: 8px; /* New button radius */
   font-weight: 600;
   font-family: var(--font-heading);
   cursor: pointer;
   border: none;
   transition: var(--transition);
-  font-size: 16px;
+  font-size: 15px;
 }
 
 /* Primary CTA is now Orange */
@@ -200,7 +200,7 @@ img { max-width: 100%; display: block; border-radius: var(--radius-sm); }
 .card {
   background: var(--color-white);
   border-radius: var(--radius-md); /* 12px */
-  padding: 24px;
+  padding: 20px;
   box-shadow: var(--shadow-md);
   transition: var(--transition);
   border: 1px solid var(--color-border);
@@ -218,27 +218,27 @@ img { max-width: 100%; display: block; border-radius: var(--radius-sm); }
   font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 1px;
-  font-size: 14px;
-  margin-bottom: 8px;
+  font-size: 13px;
+  margin-bottom: 6px;
   display: block;
 }
 
 .section-title {
-  font-size: 36px;
+  font-size: 32px;
   color: var(--color-text-heading);
-  margin-bottom: 16px;
+  margin-bottom: 12px;
   line-height: 1.2;
 }
 
 @media (max-width: 768px) {
-  .section-title { font-size: 28px; }
-  .section { padding: 60px 0; }
-  .container { padding: 0 20px; }
+  .section-title { font-size: 24px; }
+  .section { padding: 24px 0; }
+  .container { padding: 0 16px; }
 }
 
 @media (max-width: 480px) {
-  .section-title { font-size: 24px; }
-  .section { padding: 48px 0; }
+  .section-title { font-size: 22px; }
+  .section { padding: 20px 0; }
 }
 
 /* Utility spacing classes based on 8px grid */
@@ -246,7 +246,10 @@ img { max-width: 100%; display: block; border-radius: var(--radius-sm); }
 .mb-16 { margin-bottom: 16px; }
 .mb-24 { margin-bottom: 24px; }
 .mb-32 { margin-bottom: 32px; }
+.mb-40 { margin-bottom: 40px; }
 .mb-48 { margin-bottom: 48px; }
+.mb-60 { margin-bottom: 60px; }
+.mb-80 { margin-bottom: 80px; }
 
 .mt-8 { margin-top: 8px; }
 .mt-16 { margin-top: 16px; }

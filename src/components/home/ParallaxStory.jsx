@@ -1,169 +1,294 @@
-import React from 'react';
-import { motion } from 'framer-motion';
-import { ArrowRight } from 'lucide-react';
-import rameshImg from '../../assets/images/story_ramesh.png';
-import meenaImg from '../../assets/images/story_meena.png';
-import anilImg from '../../assets/images/story_anil.png';
+import React, { useState, useEffect } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
+import { ArrowRight, Quote, ChevronUp, ChevronDown } from 'lucide-react';
 
 const stories = [
   {
     name: "Ramesh's Journey",
+    title: "From Street to Science Lab",
     text: "Two years ago, Ramesh couldn't afford school and worked to support his family. Today, through our foundation, he is a top student with a bright future ahead.",
-    image: rameshImg,
+    image: "https://images.unsplash.com/photo-1524069290683-0457abfe42c3?auto=format&fit=crop&q=80&w=1200",
     color: "#16A34A"
   },
   {
     name: "Meena's Education",
+    title: "A Voice for the Voiceless",
     text: "Meena once sat outside the school gates, wishing she could join. Now, she is the lead of our girl-child education initiative in her village.",
-    image: meenaImg,
+    image: "https://images.unsplash.com/photo-1509062522246-3755977927d7?auto=format&fit=crop&q=80&w=1200",
     color: "#2563EB"
   },
   {
-    name: "Farmer Anil's RO Plant",
+    name: "Farmer Anil's Hope",
+    title: "Clean Water, Healthy Future",
     text: "Anil and his village had no clean water for decades. The RO plant we installed has reduced water-borne diseases by 90% in just one year.",
-    image: anilImg,
+    image: "https://images.unsplash.com/photo-1542810634-71277d95dcbb?auto=format&fit=crop&q=80&w=1200",
     color: "#F97316"
   }
 ];
 
 const ParallaxStory = () => {
+  const [index, setIndex] = useState(0);
+
+  const next = () => setIndex((prev) => (prev + 1) % stories.length);
+  const prev = () => setIndex((prev) => (prev - 1 + stories.length) % stories.length);
+
+  // Auto-slide
+  useEffect(() => {
+    const timer = setInterval(next, 6000);
+    return () => clearInterval(timer);
+  }, []);
+
   return (
-    <section className="stories-section">
+    <section className="vertical-stories-section">
       <div className="container">
-        
-        <div className="text-center mb-64">
-          <span className="sub-title">Success Stories</span>
-          <h2 className="section-title">Lives Transformed by You</h2>
-        </div>
+        <div className="vertical-story-grid">
+          
+          {/* Left: Content Area */}
+          <div className="vertical-story-content">
+            <div className="dot-header mb-32">
+              <h2 className="modern-title-v5">
+                <span className="dot-accent"></span>
+                Voices of Hope: <span className="text-highlight">Impact</span>
+              </h2>
+            </div>
 
-        <div className="stories-grid">
-          {stories.map((story, i) => (
-            <motion.div 
-              key={i}
-              className="story-row"
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: i * 0.1 }}
-            >
-              {/* Text Side (Always Left) */}
-              <div className="story-text-col">
-                <div className="story-tag" style={{ backgroundColor: `${story.color}15`, color: story.color }}>
-                  {story.name}
-                </div>
-                <p className="story-quote">
-                  "{story.text}"
-                </p>
-                <a href="/impact" className="story-link">
-                  Read Full Story <ArrowRight size={16} />
-                </a>
+            <div className="story-display-area">
+              <AnimatePresence mode="wait">
+                <motion.div 
+                  key={index}
+                  className="story-slide-v3"
+                  initial={{ opacity: 0, y: 40 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: -40 }}
+                  transition={{ duration: 0.6, ease: "easeOut" }}
+                >
+                  <div className="story-tag-v3" style={{ color: stories[index].color }}>
+                    {stories[index].name}
+                  </div>
+                  <h3 className="story-h3-v3">{stories[index].title}</h3>
+                  <Quote size={32} className="quote-v3" />
+                  <p className="story-p-v3">"{stories[index].text}"</p>
+                  
+                  <a href="/impact" className="impact-link-v3">
+                    Learn More <ArrowRight size={18} />
+                  </a>
+                </motion.div>
+              </AnimatePresence>
+            </div>
+
+            {/* Vertical Controls */}
+            <div className="vertical-nav-v3">
+              <button onClick={prev} className="v-nav-btn"><ChevronUp size={20} /></button>
+              <div className="v-indicator">
+                {stories.map((_, i) => (
+                  <div key={i} className={`v-dot ${i === index ? 'active' : ''}`} onClick={() => setIndex(i)} />
+                ))}
               </div>
+              <button onClick={next} className="v-nav-btn"><ChevronDown size={20} /></button>
+            </div>
+          </div>
 
-              {/* Image Side (Always Right) */}
-              <div className="story-image-col">
-                <div className="story-img-container">
-                  <img src={story.image} alt={story.name} className="story-img" />
-                  <div className="story-img-accent" style={{ backgroundColor: story.color }}></div>
-                </div>
-              </div>
-            </motion.div>
-          ))}
+          {/* Right: Large Vertical Image */}
+          <div className="vertical-story-visual">
+            <AnimatePresence mode="wait">
+              <motion.div 
+                key={index}
+                className="visual-frame-v3"
+                initial={{ opacity: 0, scale: 1.1 }}
+                animate={{ opacity: 1, scale: 1 }}
+                exit={{ opacity: 0, scale: 0.9 }}
+                transition={{ duration: 0.8 }}
+              >
+                <img src={stories[index].image} alt={stories[index].name} />
+                <div className="visual-overlay-v3"></div>
+              </motion.div>
+            </AnimatePresence>
+          </div>
+
         </div>
-
       </div>
 
-      <style>{`
-        .stories-section {
+      <style jsx>{`
+        .vertical-stories-section {
           padding: 80px 0;
-          background-color: var(--color-bg-subtle);
+          background: #fafafa;
+          overflow: hidden;
         }
 
-        .stories-grid {
-          display: flex;
-          flex-direction: column;
-          gap: 60px; /* Compact spacing between stories */
-          max-width: 900px;
-          margin: 0 auto;
-        }
-
-        .story-row {
+        .vertical-story-grid {
           display: grid;
           grid-template-columns: 1fr 1fr;
           gap: 60px;
           align-items: center;
-          padding: 32px;
-          background: white;
-          border-radius: 24px;
-          box-shadow: var(--shadow-md);
+          min-height: 500px;
         }
 
-        .story-tag {
-          display: inline-block;
-          padding: 6px 12px;
-          border-radius: 8px;
-          font-weight: 700;
-          font-size: 13px;
-          margin-bottom: 16px;
-          text-transform: uppercase;
-          letter-spacing: 1px;
+        .vertical-story-content {
+          position: relative;
+          padding-right: 40px;
         }
 
-        .story-quote {
-          font-size: 18px;
-          color: var(--color-text-main);
-          line-height: 1.6;
-          margin-bottom: 24px;
-          font-style: italic;
-        }
-
-        .story-link {
+        .dot-header {
           display: flex;
           align-items: center;
-          gap: 8px;
+        }
+
+        .dot-accent {
+          width: 10px;
+          height: 10px;
+          background: var(--color-primary);
+          border-radius: 50%;
+          margin-right: 12px;
+          box-shadow: 0 0 10px var(--color-primary-light);
+        }
+
+        .modern-title-v5 {
+          font-size: 24px;
+          font-weight: 800;
           color: var(--color-text-heading);
-          font-weight: 700;
+          margin: 0;
+        }
+
+        .story-display-area {
+          height: 300px;
+          position: relative;
+        }
+
+        .story-slide-v3 {
+          position: absolute;
+          inset: 0;
+        }
+
+        .story-tag-v3 {
           font-size: 14px;
+          font-weight: 800;
+          text-transform: uppercase;
+          letter-spacing: 1px;
+          margin-bottom: 12px;
+        }
+
+        .story-h3-v3 {
+          font-size: 32px;
+          font-weight: 800;
+          color: var(--color-text-heading);
+          margin-bottom: 20px;
+          line-height: 1.1;
+        }
+
+        .quote-v3 {
+          color: var(--color-primary-light);
+          margin-bottom: 16px;
+          opacity: 0.5;
+        }
+
+        .story-p-v3 {
+          font-size: 18px;
+          line-height: 1.6;
+          color: var(--color-text-main);
+          font-style: italic;
+          margin-bottom: 24px;
+        }
+
+        .impact-link-v3 {
+          display: inline-flex;
+          align-items: center;
+          gap: 10px;
+          font-weight: 700;
+          color: var(--color-primary);
           text-decoration: none;
         }
 
-        .story-link:hover {
-          color: var(--color-primary);
-          gap: 12px;
+        /* Vertical Nav */
+        .vertical-nav-v3 {
+          position: absolute;
+          left: -60px;
+          top: 50%;
+          transform: translateY(-50%);
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          gap: 16px;
         }
 
-        .story-image-col {
-          position: relative;
+        .v-nav-btn {
+          width: 32px;
+          height: 32px;
+          border-radius: 50%;
+          border: 1px solid var(--color-border);
+          background: white;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          cursor: pointer;
+          transition: all 0.3s ease;
         }
 
-        .story-img-container {
+        .v-nav-btn:hover {
+          background: var(--color-primary);
+          color: white;
+          border-color: var(--color-primary);
+        }
+
+        .v-indicator {
+          display: flex;
+          flex-direction: column;
+          gap: 8px;
+        }
+
+        .v-dot {
+          width: 6px;
+          height: 6px;
+          border-radius: 50%;
+          background: var(--color-border);
+          cursor: pointer;
+          transition: all 0.3s ease;
+        }
+
+        .v-dot.active {
+          height: 20px;
+          border-radius: 3px;
+          background: var(--color-primary);
+        }
+
+        /* Visual Side */
+        .vertical-story-visual {
           position: relative;
-          aspect-ratio: 4/3;
-          border-radius: 16px;
+          height: 550px;
+          border-radius: 40px;
           overflow: hidden;
+          box-shadow: 0 40px 80px rgba(0,0,0,0.1);
         }
 
-        .story-img {
+        .visual-frame-v3 {
+          width: 100%;
+          height: 100%;
+        }
+
+        .visual-frame-v3 img {
           width: 100%;
           height: 100%;
           object-fit: cover;
         }
 
-        .story-img-accent {
+        .visual-overlay-v3 {
           position: absolute;
-          bottom: 0;
-          right: 0;
-          width: 40%;
-          height: 8px;
-          border-radius: 4px 0 0 0;
+          inset: 0;
+          background: linear-gradient(to top, rgba(0,0,0,0.4), transparent);
+        }
+
+        @media (max-width: 1024px) {
+          .vertical-story-grid { grid-template-columns: 1fr; gap: 40px; }
+          .vertical-story-visual { height: 400px; }
+          .vertical-nav-v3 { left: auto; right: 0; flex-direction: row; top: -40px; }
+          .v-indicator { flex-direction: row; }
+          .v-dot.active { width: 20px; height: 6px; }
+          .story-display-area { height: auto; min-height: 300px; }
+          .story-slide-v3 { position: relative; }
         }
 
         @media (max-width: 768px) {
-          .story-row {
-            grid-template-columns: 1fr;
-            gap: 24px;
-            padding: 24px;
-          }
-          .story-quote { font-size: 16px; }
+          .story-h3-v3 { font-size: 28px; }
+          .story-p-v3 { font-size: 16px; }
         }
       `}</style>
     </section>

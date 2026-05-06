@@ -1,229 +1,286 @@
-import React, { useState } from 'react';
-import { motion } from 'framer-motion';
-import { Flag, Users, Globe, Award } from 'lucide-react';
+import React from 'react';
+import { motion, useScroll, useTransform } from 'framer-motion';
+import { Flag, Users, Globe, HeartPulse, Award } from 'lucide-react';
 
 const milestones = [
   {
     year: '2010',
-    title: 'The Beginning',
+    title: 'The Spark of Hope',
     description: 'Hope Rise Foundation was officially registered, starting with weekend classes for 20 street children in Hyderabad.',
-    icon: <Flag size={20} />,
-    color: 'var(--color-primary)'
+    icon: <Flag size={24} />,
+    color: '#16A34A',
+    image: 'https://images.unsplash.com/photo-1488521787991-ed7bbaae773c?auto=format&fit=crop&q=80&w=400'
   },
   {
     year: '2015',
-    title: 'Healthcare Initiative',
+    title: 'Healthcare for All',
     description: 'Launched our first mobile medical van, providing basic healthcare to over 5,000 residents in rural Telangana.',
-    icon: <HeartPulseIcon />, // I will use a custom SVG here or fallback
-    iconName: 'heart',
-    color: 'var(--color-secondary)'
+    icon: <HeartPulse size={24} />,
+    color: '#2563EB',
+    image: 'https://images.unsplash.com/photo-1584515933487-779824d29309?auto=format&fit=crop&q=80&w=400'
   },
   {
     year: '2020',
-    title: 'COVID-19 Response',
-    description: 'Distributed 50,000+ ration kits and set up 3 temporary isolation centers during the peak of the pandemic.',
-    icon: <Users size={20} />,
-    color: 'var(--color-accent)'
+    title: 'Crisis Response',
+    description: 'Distributed 50,000+ ration kits and set up 3 temporary isolation centers during the global pandemic.',
+    icon: <Users size={24} />,
+    color: '#F97316',
+    image: 'https://images.unsplash.com/photo-1593113598332-cd288d649433?auto=format&fit=crop&q=80&w=400'
   },
   {
-    year: '2023',
-    title: 'National Expansion',
-    description: 'Expanded our educational and environmental programs to 3 neighboring states, impacting 100,000+ lives globally.',
-    icon: <Globe size={20} />,
-    color: 'var(--color-primary)'
+    year: '2024',
+    title: 'Global Expansion',
+    description: 'Expanded programs to 5 countries, impacting 500,000+ lives through education and sustainable energy.',
+    icon: <Globe size={24} />,
+    color: '#7C3AED',
+    image: 'https://images.unsplash.com/photo-1529390079861-591de354faf5?auto=format&fit=crop&q=80&w=400'
   }
 ];
 
-// Simple fallback icon component since lucide HeartPulse might not be available
-function HeartPulseIcon() {
-  return (
-    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-      <path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/>
-      <path d="M3.22 12H9.5l.5-1 2 4.5 2-7 1.5 3.5h5.27"/>
-    </svg>
-  );
-}
-
-
 const JourneyTimeline = () => {
-  const [hoveredIndex, setHoveredIndex] = useState(null);
-
   return (
-    <section className="section section-bg">
+    <section className="modern-journey">
       <div className="container">
         <div className="text-center mb-48">
-          <span className="sub-title">Our History</span>
-          <h2 className="section-title">The Journey of Hope</h2>
+          <span className="modern-sub">Our Legacy</span>
+          <h2 className="modern-title">A Decade of <span className="text-highlight">Impact</span></h2>
         </div>
 
-        <div className="timeline-container">
-          <div className="timeline-line"></div>
-          
-          {milestones.map((item, index) => {
-            const isEven = index % 2 === 0;
-            const isHovered = hoveredIndex === index;
+        <div className="story-vertical">
+          <div className="story-line">
+            <div className="story-progress"></div>
+          </div>
 
-            return (
-              <motion.div 
-                key={index}
-                className={`timeline-item ${isEven ? 'left' : 'right'}`}
-                initial={{ opacity: 0, y: 50 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, margin: "-100px" }}
-                transition={{ duration: 0.5, delay: index * 0.1 }}
-                onMouseEnter={() => setHoveredIndex(index)}
-                onMouseLeave={() => setHoveredIndex(null)}
-              >
-                {/* Center Node */}
-                <div className="timeline-node" style={{ borderColor: item.color }}>
-                  <div className="timeline-node-inner" style={{ backgroundColor: isHovered ? item.color : 'white', color: isHovered ? 'white' : item.color }}>
-                    {item.icon}
+          {milestones.map((item, index) => (
+            <motion.div 
+              key={index}
+              className="story-block"
+              initial={{ opacity: 0, x: index % 2 === 0 ? -50 : 50 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true, margin: "-100px" }}
+              transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
+            >
+              {/* Year Background */}
+              <div className="year-bg">{item.year}</div>
+
+              <div className={`story-flex ${index % 2 === 0 ? 'even' : 'odd'}`}>
+                {/* Visual Side */}
+                <div className="story-visual">
+                  <div className="visual-frame" style={{ '--accent': item.color }}>
+                    <img src={item.image} alt={item.title} />
+                    <div className="visual-icon" style={{ backgroundColor: item.color }}>
+                      {item.icon}
+                    </div>
                   </div>
                 </div>
 
-                {/* Content Card */}
-                <div className="timeline-content card">
-                  <span className="timeline-year" style={{ color: item.color }}>{item.year}</span>
-                  <h3 className="mb-8">{item.title}</h3>
-                  <motion.div 
-                    className="timeline-description text-muted"
-                    initial={{ height: 'auto' }}
-                    animate={{ height: isHovered ? 'auto' : '60px' }}
-                    style={{ overflow: 'hidden' }}
-                  >
-                    <p>{item.description}</p>
-                  </motion.div>
+                {/* Content Side */}
+                <div className="story-content">
+                  <div className="content-inner">
+                    <div className="story-year-tag" style={{ color: item.color }}>{item.year}</div>
+                    <h3 className="story-title">{item.title}</h3>
+                    <p className="story-desc">{item.description}</p>
+                    <div className="story-footer">
+                      <div className="footer-line" style={{ backgroundColor: item.color }}></div>
+                      <span>Milestone Achieved</span>
+                    </div>
+                  </div>
                 </div>
-              </motion.div>
-            );
-          })}
+              </div>
+            </motion.div>
+          ))}
         </div>
       </div>
 
-      <style>{`
-        .timeline-container {
+      <style jsx>{`
+        .modern-journey {
+          padding: 80px 0;
+          background: #fff;
           position: relative;
-          max-width: 1000px;
-          margin: 0 auto;
-          padding: 40px 0;
+          overflow: hidden;
         }
 
-        .timeline-line {
+        .story-vertical {
+          position: relative;
+          max-width: 1200px;
+          margin: 0 auto;
+        }
+
+        .story-line {
           position: absolute;
           left: 50%;
-          transform: translateX(-50%);
-          width: 2px;
-          height: 100%;
-          background: var(--color-border);
           top: 0;
+          bottom: 0;
+          width: 2px;
+          background: var(--color-border);
+          transform: translateX(-50%);
+          z-index: 0;
         }
 
-        .timeline-item {
-          position: relative;
-          width: 50%;
-          padding: 20px 40px;
-          margin-bottom: 20px;
-        }
-
-        .timeline-item.left {
+        .story-progress {
+          position: absolute;
+          top: 0;
           left: 0;
-          text-align: right;
+          width: 100%;
+          height: 100%;
+          background: linear-gradient(to bottom, var(--color-primary), var(--color-secondary));
+          transform-origin: top;
+          /* Ideally linked to scroll, but static for now */
+          opacity: 0.3;
         }
 
-        .timeline-item.right {
+        .story-block {
+          position: relative;
+          margin-bottom: 100px;
+          z-index: 1;
+        }
+
+        .year-bg {
+          position: absolute;
+          top: 50%;
           left: 50%;
+          transform: translate(-50%, -50%);
+          font-size: 15vw;
+          font-weight: 900;
+          color: rgba(0,0,0,0.03);
+          z-index: -1;
+          pointer-events: none;
+          line-height: 1;
+        }
+
+        .story-flex {
+          display: grid;
+          grid-template-columns: 1fr 1fr;
+          gap: 60px;
+          align-items: center;
+        }
+
+        .story-flex.odd {
+          direction: rtl;
+        }
+
+        .story-flex.odd .content-inner {
+          direction: ltr;
           text-align: left;
         }
 
-        .timeline-node {
-          position: absolute;
-          top: 30px;
-          width: 48px;
-          height: 48px;
-          background: var(--color-bg-subtle);
-          border: 4px solid;
-          border-radius: 50%;
-          z-index: 10;
+        /* Visual Side */
+        .story-visual {
           display: flex;
-          align-items: center;
           justify-content: center;
-          padding: 4px;
         }
 
-        .timeline-item.left .timeline-node {
-          right: -24px;
+        .visual-frame {
+          position: relative;
+          width: 100%;
+          max-width: 400px;
+          aspect-ratio: 1;
+          border-radius: 40px;
+          padding: 15px;
+          background: white;
+          box-shadow: 0 30px 60px rgba(0,0,0,0.1);
         }
 
-        .timeline-item.right .timeline-node {
-          left: -24px;
-        }
-
-        .timeline-node-inner {
+        .visual-frame img {
           width: 100%;
           height: 100%;
-          border-radius: 50%;
+          object-fit: cover;
+          border-radius: 30px;
+        }
+
+        .visual-icon {
+          position: absolute;
+          bottom: -20px;
+          right: -20px;
+          width: 64px;
+          height: 64px;
+          border-radius: 20px;
           display: flex;
           align-items: center;
           justify-content: center;
-          transition: var(--transition);
+          color: white;
+          box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+          border: 4px solid white;
         }
 
-        .timeline-content {
-          position: relative;
-          transition: var(--transition);
+        /* Content Side */
+        .story-content {
+          display: flex;
+          flex-direction: column;
         }
 
-        .timeline-item.left .timeline-content {
-          transform-origin: right center;
-        }
-        
-        .timeline-item.right .timeline-content {
-          transform-origin: left center;
-        }
-
-        .timeline-year {
-          display: inline-block;
-          font-family: var(--font-heading);
-          font-weight: 800;
+        .story-year-tag {
           font-size: 24px;
-          margin-bottom: 8px;
+          font-weight: 800;
+          margin-bottom: 12px;
+          font-family: var(--font-heading);
+        }
+
+        .story-title {
+          font-size: 32px;
+          font-weight: 800;
+          color: var(--color-text-heading);
+          margin-bottom: 20px;
+        }
+
+        .story-desc {
+          font-size: 18px;
+          line-height: 1.7;
+          color: var(--color-text-muted);
+          margin-bottom: 32px;
+        }
+
+        .story-footer {
+          display: flex;
+          align-items: center;
+          gap: 16px;
+          font-weight: 700;
+          font-size: 14px;
+          color: var(--color-text-heading);
+          text-transform: uppercase;
           letter-spacing: 1px;
         }
 
-        .timeline-description {
-          position: relative;
+        .footer-line {
+          width: 40px;
+          height: 3px;
+          border-radius: 2px;
         }
 
-        /* Fade out effect when collapsed */
-        .timeline-item:not(:hover) .timeline-description::after {
-          content: '';
-          position: absolute;
-          bottom: 0;
-          left: 0;
-          width: 100%;
-          height: 30px;
-          background: linear-gradient(to bottom, rgba(255,255,255,0), rgba(255,255,255,1));
+        .modern-sub {
+          display: block;
+          font-weight: 800;
+          text-transform: uppercase;
+          letter-spacing: 0.2em;
+          color: var(--color-primary);
+          font-size: 14px;
+          margin-bottom: 12px;
+        }
+
+        .modern-title {
+          font-size: 36px;
+          font-weight: 800;
+          color: var(--color-text-heading);
+        }
+
+        .text-highlight {
+          color: var(--color-primary);
+        }
+
+        @media (max-width: 1024px) {
+          .story-flex { gap: 50px; }
+          .story-title { font-size: 24px; }
+          .story-desc { font-size: 16px; }
         }
 
         @media (max-width: 768px) {
-          .timeline-line {
-            left: 30px;
-          }
-          
-          .timeline-item {
-            width: 100%;
-            left: 0 !important;
-            padding: 20px 0 20px 80px;
-            text-align: left !important;
-          }
-
-          .timeline-node {
-            left: 6px !important;
-          }
-          
-          .timeline-item.left .timeline-content {
-            transform-origin: left center;
-          }
+          .story-line { left: 30px; transform: none; }
+          .story-flex { grid-template-columns: 1fr; gap: 40px; direction: ltr !important; }
+          .story-flex.odd .content-inner { text-align: left; }
+          .story-block { padding-left: 70px; margin-bottom: 80px; }
+          .year-bg { display: none; }
+          .visual-frame { max-width: 100%; aspect-ratio: 4/3; }
+          .modern-title { font-size: 32px; }
         }
       `}</style>
     </section>

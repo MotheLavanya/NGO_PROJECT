@@ -1,196 +1,282 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Heart, Mail, Phone, MapPin } from 'lucide-react';
-import { Facebook, Twitter, Instagram, Linkedin } from './BrandIcons';
+import { Heart, Mail, Phone, MapPin, Send, Globe, Heart as HeartIcon, Sparkles as SparkleIcon, Users as UsersIcon, Link as LinkIcon } from 'lucide-react';
 
 const Footer = () => {
   const currentYear = new Date().getFullYear();
 
   return (
-    <footer className="main-footer">
-      <div className="container footer-grid">
-        <div className="footer-brand">
-          <Link to="/" className="logo">
-            <Heart className="logo-icon" fill="var(--color-primary)" />
-            <span className="logo-text">Hope <span className="logo-accent">Rise</span></span>
-          </Link>
-          <p className="footer-tagline">
-            Empowering underprivileged communities in Telangana through education, healthcare, and sustainable initiatives since 2010.
-          </p>
-          <div className="social-links">
-            <a href="#" className="social-icon"><Facebook size={20} /></a>
-            <a href="#" className="social-icon"><Twitter size={20} /></a>
-            <a href="#" className="social-icon"><Instagram size={20} /></a>
-            <a href="#" className="social-icon"><Linkedin size={20} /></a>
+    <footer className="premium-footer">
+      {/* Removed Wave Divider for Space Efficiency */}
+
+      <div className="container footer-main">
+        <div className="footer-grid-v2">
+          {/* Brand Info */}
+          <div className="footer-col brand">
+            <Link to="/" className="footer-logo">
+              <Heart size={32} fill="var(--color-primary)" />
+              <span>Hope <span className="text-primary">Rise</span></span>
+            </Link>
+            <p className="footer-bio">
+              Empowering underprivileged communities through sustainable education and healthcare initiatives since 2010.
+            </p>
+            <div className="footer-socials">
+              <a href="#" className="social-pill" title="Social"><Globe size={20} /></a>
+              <a href="#" className="social-pill" title="Impact"><HeartIcon size={20} /></a>
+              <a href="#" className="social-pill" title="Community"><SparkleIcon size={20} /></a>
+              <a href="#" className="social-pill" title="Network"><LinkIcon size={20} /></a>
+            </div>
+          </div>
+
+          {/* Quick Links */}
+          <div className="footer-col">
+            <h4 className="footer-heading">Navigation</h4>
+            <ul className="footer-links-v2">
+              <li><Link to="/about">Our Mission</Link></li>
+              <li><Link to="/programs">Programs</Link></li>
+              <li><Link to="/impact">Impact Stories</Link></li>
+              <li><Link to="/volunteer">Volunteer</Link></li>
+              <li><Link to="/donate">Donate</Link></li>
+            </ul>
+          </div>
+
+          {/* Contact Info */}
+          <div className="footer-col">
+            <h4 className="footer-heading">Connect</h4>
+            <div className="footer-contact-v2">
+              <div className="contact-item">
+                <MapPin size={20} className="text-primary" />
+                <span>Hitech City, Hyderabad, 500081</span>
+              </div>
+              <div className="contact-item">
+                <Phone size={20} className="text-primary" />
+                <span>+91 40 1234 5678</span>
+              </div>
+              <div className="contact-item">
+                <Mail size={20} className="text-primary" />
+                <span>hello@hoperise.org</span>
+              </div>
+            </div>
+          </div>
+
+          {/* Newsletter */}
+          <div className="footer-col newsletter">
+            <h4 className="footer-heading">Newsletter</h4>
+            <p className="news-desc">Stay updated with our latest impact stories and events.</p>
+            <div className="newsletter-box">
+              <input type="email" placeholder="Email Address" />
+              <button className="news-btn"><Send size={18} /></button>
+            </div>
           </div>
         </div>
 
-        <div className="footer-links">
-          <h3>Quick Links</h3>
-          <ul>
-            <li><Link to="/about">About Us</Link></li>
-            <li><Link to="/programs">Our Programs</Link></li>
-            <li><Link to="/impact">Impact Stories</Link></li>
-            <li><Link to="/volunteer">Get Involved</Link></li>
-            <li><Link to="/donate">Donate Now</Link></li>
-          </ul>
-        </div>
+        <div className="footer-divider"></div>
 
-        <div className="footer-links">
-          <h3>Resources</h3>
-          <ul>
-            <li><Link to="/transparency">Transparency</Link></li>
-            <li><Link to="/blog">Latest News</Link></li>
-            <li><Link to="/transparency">Annual Reports</Link></li>
-            <li><Link to="/privacy">Privacy Policy</Link></li>
-            <li><Link to="/terms">Terms of Use</Link></li>
-          </ul>
-        </div>
-
-        <div className="footer-contact">
-          <h3>Contact Us</h3>
-          <ul className="contact-list">
-            <li>
-              <MapPin size={20} className="contact-icon" />
-              <span>Plot 42, Hitech City, Hyderabad, Telangana 500081</span>
-            </li>
-            <li>
-              <Phone size={20} className="contact-icon" />
-              <span>+91 40 1234 5678</span>
-            </li>
-            <li>
-              <Mail size={20} className="contact-icon" />
-              <span>hello@hoperise.org</span>
-            </li>
-          </ul>
-        </div>
-      </div>
-
-      <div className="footer-bottom">
-        <div className="container bottom-flex">
+        <div className="footer-bottom-v2">
           <p>&copy; {currentYear} Hope Rise Foundation. All Rights Reserved.</p>
-          <div className="legal-badges">
-            <span>Reg No: 1234/2010</span>
-            <span>FCRA Compliant</span>
-            <span>80G Tax Exempt</span>
+          <div className="footer-legal">
+            <span className="badge-legal">Reg No: 1234/2010</span>
+            <span className="badge-legal">80G Tax Exempt</span>
           </div>
         </div>
       </div>
 
-      <style>{`
-        .main-footer {
-          background-color: var(--color-bg-subtle);
-          padding-top: 80px;
-          border-top: 1px solid rgba(0,0,0,0.05);
+      <style jsx>{`
+        .premium-footer {
+          background: #0f172a;
+          color: white;
+          padding-bottom: 40px;
+          position: relative;
         }
 
-        .footer-grid {
+        .footer-wave {
+          position: absolute;
+          top: 0;
+          left: 0;
+          width: 100%;
+          overflow: hidden;
+          line-height: 0;
+        }
+
+        .footer-wave svg {
+          position: relative;
+          display: block;
+          width: calc(100% + 1.3px);
+          height: 80px;
+        }
+
+        .footer-wave .shape-fill {
+          fill: #FFFFFF;
+        }
+
+        .footer-main {
+          padding-top: 60px;
+        }
+
+        .footer-grid-v2 {
           display: grid;
-          grid-template-columns: 2fr 1fr 1fr 1.5fr;
-          gap: 4rem;
-          margin-bottom: 60px;
+          grid-template-columns: 2fr 1fr 1.5fr 2fr;
+          gap: 40px;
+          margin-bottom: 40px;
         }
 
-        .footer-brand .logo {
-          font-family: var(--font-heading);
-          font-weight: 700;
-          font-size: 24px;
-          color: var(--color-text-heading);
+        .footer-logo {
           display: flex;
           align-items: center;
-          gap: 8px;
-          margin-bottom: 24px;
+          gap: 12px;
+          font-size: 24px;
+          font-weight: 800;
+          color: white;
+          text-decoration: none;
+          margin-bottom: 16px;
         }
 
-        .footer-tagline {
-          color: var(--color-text-muted);
-          margin-bottom: 2rem;
-          max-width: 320px;
+        .footer-bio {
+          color: rgba(255, 255, 255, 0.6);
+          font-size: 14px;
+          line-height: 1.6;
+          margin-bottom: 20px;
+          max-width: 300px;
         }
 
-        .social-links {
+        .footer-socials {
           display: flex;
-          gap: 1rem;
+          gap: 12px;
         }
 
-        .social-icon {
-          width: 40px;
-          height: 40px;
-          background: var(--color-white);
+        .social-pill {
+          width: 48px;
+          height: 48px;
+          background: rgba(255, 255, 255, 0.05);
           display: flex;
           align-items: center;
           justify-content: center;
-          border-radius: 50%;
-          color: var(--color-primary);
-          transition: var(--transition);
-          box-shadow: var(--shadow-sm);
+          border-radius: 16px;
+          color: white;
+          transition: all 0.3s ease;
+          border: 1px solid rgba(255, 255, 255, 0.1);
         }
 
-        .social-icon:hover {
+        .social-pill:hover {
+          background: var(--color-primary);
+          border-color: var(--color-primary);
+          transform: translateY(-5px);
+        }
+
+        .footer-heading {
+          font-size: 16px;
+          font-weight: 800;
+          margin-bottom: 20px;
+          color: white;
+        }
+
+        .footer-links-v2 {
+          list-style: none;
+          padding: 0;
+        }
+
+        .footer-links-v2 li {
+          margin-bottom: 16px;
+        }
+
+        .footer-links-v2 a {
+          color: rgba(255, 255, 255, 0.6);
+          text-decoration: none;
+          transition: all 0.3s ease;
+          font-weight: 600;
+        }
+
+        .footer-links-v2 a:hover {
+          color: var(--color-primary);
+          padding-left: 8px;
+        }
+
+        .footer-contact-v2 {
+          display: flex;
+          flex-direction: column;
+          gap: 20px;
+        }
+
+        .contact-item {
+          display: flex;
+          gap: 16px;
+          align-items: flex-start;
+          color: rgba(255, 255, 255, 0.6);
+          font-weight: 600;
+        }
+
+        .newsletter-box {
+          display: flex;
+          background: rgba(255, 255, 255, 0.05);
+          border-radius: 16px;
+          padding: 6px;
+          border: 1px solid rgba(255, 255, 255, 0.1);
+          margin-top: 24px;
+        }
+
+        .newsletter-box input {
+          flex: 1;
+          background: transparent;
+          border: none;
+          padding: 0 16px;
+          color: white;
+          outline: none;
+        }
+
+        .news-btn {
+          width: 48px;
+          height: 48px;
           background: var(--color-primary);
           color: white;
-          transform: translateY(-3px);
+          border: none;
+          border-radius: 12px;
+          cursor: pointer;
+          transition: all 0.3s ease;
         }
 
-        .footer-links h3, .footer-contact h3 {
-          font-size: 1.2rem;
-          margin-bottom: 1.5rem;
-          color: var(--color-text-main);
+        .news-btn:hover {
+          background: var(--color-primary-dark);
+          transform: scale(1.05);
         }
 
-        .footer-links ul li {
-          margin-bottom: 0.8rem;
+        .news-desc {
+          color: rgba(255, 255, 255, 0.6);
+          font-size: 14px;
         }
 
-        .footer-links ul li a {
-          color: var(--color-text-muted);
-          font-size: 0.95rem;
+        .footer-divider {
+          height: 1px;
+          background: rgba(255, 255, 255, 0.1);
+          margin-bottom: 24px;
         }
 
-        .footer-links ul li a:hover {
-          color: var(--color-primary);
-          padding-left: 5px;
-        }
-
-        .contact-list li {
-          display: flex;
-          gap: 12px;
-          margin-bottom: 1.2rem;
-          color: var(--color-text-muted);
-          font-size: 0.95rem;
-        }
-
-        .contact-icon {
-          color: var(--color-primary);
-          flex-shrink: 0;
-        }
-
-        .footer-bottom {
-          padding: 30px 0;
-          background: var(--color-white);
-          border-top: 1px solid rgba(0,0,0,0.05);
-          font-size: 0.9rem;
-          color: var(--color-text-light);
-        }
-
-        .bottom-flex {
+        .footer-bottom-v2 {
           display: flex;
           justify-content: space-between;
           align-items: center;
+          color: rgba(255, 255, 255, 0.4);
+          font-size: 14px;
         }
 
-        .legal-badges {
+        .footer-legal {
           display: flex;
-          gap: 1.5rem;
+          gap: 24px;
+        }
+
+        .badge-legal {
+          background: rgba(255, 255, 255, 0.05);
+          padding: 4px 12px;
+          border-radius: 8px;
+          font-size: 12px;
         }
 
         @media (max-width: 1024px) {
-          .footer-grid { grid-template-columns: 1fr 1fr; }
+          .footer-grid-v2 { grid-template-columns: 1fr 1fr; }
         }
 
-        @media (max-width: 640px) {
-          .footer-grid { grid-template-columns: 1fr; gap: 2.5rem; }
-          .bottom-flex { flex-direction: column; gap: 1rem; text-align: center; }
+        @media (max-width: 768px) {
+          .footer-grid-v2 { grid-template-columns: 1fr; }
+          .footer-bottom-v2 { flex-direction: column; gap: 24px; text-align: center; }
         }
       `}</style>
     </footer>

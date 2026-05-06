@@ -1,136 +1,228 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { Search, PenTool, Rocket, BarChart } from 'lucide-react';
+import { Search, PenTool, Rocket, BarChart, ChevronRight } from 'lucide-react';
 
 const steps = [
   {
     number: '01',
     title: 'Identify Problem',
     description: 'We conduct ground-level surveys to understand the core issues facing marginalized communities.',
-    icon: <Search size={28} />
+    icon: <Search size={32} />,
+    color: '#16A34A'
   },
   {
     number: '02',
     title: 'Plan Solution',
     description: 'Collaborating with experts to design sustainable, scalable, and community-driven interventions.',
-    icon: <PenTool size={28} />
+    icon: <PenTool size={32} />,
+    color: '#2563EB'
   },
   {
     number: '03',
-    title: 'Execute',
+    title: 'Execute Strategy',
     description: 'Our dedicated volunteers and staff implement the programs directly on the ground.',
-    icon: <Rocket size={28} />
+    icon: <Rocket size={32} />,
+    color: '#F97316'
   },
   {
     number: '04',
     title: 'Measure Impact',
-    description: 'We rigorously track outcomes, ensuring transparency and continuous improvement in our approach.',
-    icon: <BarChart size={28} />
+    description: 'We rigorously track outcomes, ensuring transparency and continuous improvement.',
+    icon: <BarChart size={32} />,
+    color: '#7C3AED'
   }
 ];
 
 const StepProcess = () => {
   return (
-    <section className="section bg-white">
+    <section className="modern-process">
       <div className="container">
         <div className="text-center mb-48">
-          <span className="sub-title">How We Work</span>
-          <h2 className="section-title">Our Approach to Change</h2>
+          <span className="modern-sub">Our Methodology</span>
+          <h2 className="modern-title">The <span className="text-highlight">Process</span> of Change</h2>
         </div>
 
-        <div className="process-grid">
+        <div className="process-flow">
           {steps.map((step, index) => (
             <motion.div 
               key={index}
-              className="process-step"
+              className="process-node"
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ delay: index * 0.1 }}
+              transition={{ delay: index * 0.15 }}
             >
-              <div className="step-number">{step.number}</div>
-              <div className="step-icon">
-                {step.icon}
+              <div className="node-connector">
+                {index !== steps.length - 1 && (
+                  <div className="connector-path">
+                    <motion.div 
+                      className="path-fill"
+                      initial={{ scaleX: 0 }}
+                      whileInView={{ scaleX: 1 }}
+                      transition={{ duration: 1, delay: 0.5 }}
+                    />
+                  </div>
+                )}
               </div>
-              <h3 className="mb-8">{step.title}</h3>
-              <p className="text-muted text-small">{step.description}</p>
-              
-              {/* Connector Line (hidden on last item) */}
-              {index !== steps.length - 1 && (
-                <div className="step-connector"></div>
-              )}
+
+              <div className="node-content">
+                <div className="node-icon-wrapper" style={{ '--accent': step.color }}>
+                  <div className="node-number">{step.number}</div>
+                  <div className="node-icon">{step.icon}</div>
+                </div>
+                
+                <h3 className="node-title">{step.title}</h3>
+                <p className="node-desc">{step.description}</p>
+                
+                <div className="node-step-tag" style={{ color: step.color }}>
+                  Phase {step.number} <ChevronRight size={14} />
+                </div>
+              </div>
             </motion.div>
           ))}
         </div>
       </div>
 
-      <style>{`
-        .process-grid {
+      <style jsx>{`
+        .modern-process {
+          padding: 80px 0;
+          background: #fff;
+          position: relative;
+        }
+
+        .process-flow {
           display: grid;
           grid-template-columns: repeat(4, 1fr);
-          gap: 24px;
+          gap: 40px;
           position: relative;
         }
 
-        .process-step {
+        .process-node {
+          position: relative;
           text-align: center;
-          position: relative;
-          padding: 24px 16px;
         }
 
-        .step-number {
-          font-family: var(--font-heading);
-          font-size: 64px;
-          font-weight: 800;
-          color: var(--color-bg-subtle);
+        .node-connector {
           position: absolute;
-          top: -20px;
+          top: 50px;
           left: 50%;
-          transform: translateX(-50%);
+          width: 100%;
           z-index: 0;
-          line-height: 1;
         }
 
-        .step-icon {
-          width: 80px;
-          height: 80px;
-          background: var(--color-white);
-          border-radius: 50%;
+        .connector-path {
+          height: 2px;
+          background: var(--color-border);
+          position: relative;
+          width: 100%;
+        }
+
+        .path-fill {
+          position: absolute;
+          top: 0; left: 0;
+          height: 100%;
+          width: 100%;
+          background: var(--color-primary);
+          transform-origin: left;
+        }
+
+        .node-content {
+          position: relative;
+          z-index: 1;
+        }
+
+        .node-icon-wrapper {
+          width: 100px;
+          height: 100px;
+          background: white;
+          border-radius: 30px;
           display: flex;
           align-items: center;
           justify-content: center;
-          margin: 0 auto 24px;
+          margin: 0 auto 32px;
           position: relative;
-          z-index: 1;
-          color: var(--color-primary);
-          box-shadow: var(--shadow-md);
-          border: 2px solid var(--color-primary-light);
-          transition: var(--transition);
+          box-shadow: 0 20px 40px rgba(0,0,0,0.08);
+          border: 1px solid var(--color-border);
+          transition: all 0.4s ease;
         }
 
-        .process-step:hover .step-icon {
-          background: var(--color-primary);
-          color: var(--color-white);
-          transform: scale(1.1);
+        .process-node:hover .node-icon-wrapper {
+          transform: translateY(-10px);
+          border-color: var(--accent);
+          color: var(--accent);
+          box-shadow: 0 30px 60px rgba(0,0,0,0.12);
         }
 
-        .step-connector {
+        .node-number {
           position: absolute;
-          top: 64px; /* Align with center of icon */
-          right: -50%;
-          width: 100%;
-          height: 2px;
-          background: dashed 2px var(--color-border);
-          z-index: 0;
+          top: -10px;
+          right: -10px;
+          width: 32px;
+          height: 32px;
+          background: var(--color-text-heading);
+          color: white;
+          border-radius: 10px;
+          font-size: 12px;
+          font-weight: 800;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          border: 3px solid white;
+        }
+
+        .node-title {
+          font-size: 22px;
+          font-weight: 800;
+          color: var(--color-text-heading);
+          margin-bottom: 16px;
+        }
+
+        .node-desc {
+          font-size: 15px;
+          color: var(--color-text-muted);
+          line-height: 1.6;
+          margin-bottom: 24px;
+        }
+
+        .node-step-tag {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          gap: 6px;
+          font-weight: 700;
+          font-size: 13px;
+          text-transform: uppercase;
+          letter-spacing: 1px;
+        }
+
+        .modern-sub {
+          display: block;
+          font-weight: 800;
+          text-transform: uppercase;
+          letter-spacing: 0.2em;
+          color: var(--color-primary);
+          font-size: 14px;
+          margin-bottom: 12px;
+        }
+
+        .modern-title {
+          font-size: 36px;
+          font-weight: 800;
+          color: var(--color-text-heading);
+        }
+
+        .text-highlight {
+          color: var(--color-primary);
         }
 
         @media (max-width: 1024px) {
-          .process-grid { grid-template-columns: repeat(2, 1fr); gap: 48px 24px; }
-          .step-connector { display: none; } /* Hide connectors on smaller screens */
+          .process-flow { grid-template-columns: repeat(2, 1fr); gap: 60px 40px; }
+          .node-connector { display: none; }
         }
 
         @media (max-width: 640px) {
-          .process-grid { grid-template-columns: 1fr; }
+          .process-flow { grid-template-columns: 1fr; }
+          .modern-title { font-size: 32px; }
         }
       `}</style>
     </section>

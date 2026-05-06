@@ -1,6 +1,6 @@
 import React from 'react';
-import { motion } from 'framer-motion';
-import { ArrowRight, Heart, Users, GraduationCap, Globe, BookOpen, Activity, Droplets, MapPin } from 'lucide-react';
+import { motion as fMotion, AnimatePresence } from 'framer-motion';
+import { ArrowRight, Heart, Users, Globe, BookOpen, Activity, Droplets, MapPin, Sparkles, Target } from 'lucide-react';
 import AnimatedSection from '../components/AnimatedSection';
 import ImpactStats from '../components/ImpactStats';
 
@@ -14,9 +14,9 @@ import TestimonialsSlider from '../components/home/TestimonialsSlider';
 import PartnersStrip from '../components/home/PartnersStrip';
 import CTABanner from '../components/home/CTABanner';
 import EventsSection from '../components/home/EventsSection';
+import Hero from '../components/home/Hero';
 
 // Assets
-import heroImg from '../assets/images/hero.png'; // Will use as placeholder if needed
 import eduImg from '../assets/images/education.png';
 import healthImg from '../assets/images/healthcare.png';
 import waterImg from '../assets/images/water.png';
@@ -31,246 +31,402 @@ const HomePage = () => {
 
   const programs = [
     {
-      title: 'Education for All',
-      desc: 'Bridging the educational gap by providing resources and modern learning tools to rural schools.',
-      icon: <BookOpen size={32} />,
-      color: 'var(--color-primary)',
-      img: eduImg
+      id: 'edu',
+      title: 'Digital Education',
+      tag: 'Learning',
+      desc: 'Bridging the educational gap by providing modern learning tools and smart classes to rural schools.',
+      icon: <BookOpen size={24} />,
+      color: '#16A34A',
+      img: eduImg,
+      stats: '45+ Schools'
     },
     {
-      title: 'Healthcare Access',
-      desc: 'Mobile medical clinics bringing vital healthcare services to remote and underserved areas.',
-      icon: <Activity size={32} />,
-      color: 'var(--color-secondary)',
-      img: healthImg
+      id: 'health',
+      title: 'Healthcare Reach',
+      tag: 'Wellness',
+      desc: 'Mobile medical clinics and specialized health camps bringing vital services to remote tribal areas.',
+      icon: <Activity size={24} />,
+      color: '#2563EB',
+      img: healthImg,
+      stats: '12k Patients'
     },
     {
-      title: 'Environmental Sustainability',
-      desc: 'Planting trees and installing clean water systems to protect our planet for future generations.',
-      icon: <Droplets size={32} />,
-      color: 'var(--color-accent)',
-      img: waterImg
+      id: 'eco',
+      title: 'Sustainable Eco',
+      tag: 'Environment',
+      desc: 'Community-led reforestation and solar-powered water filtration systems for long-term health.',
+      icon: <Droplets size={24} />,
+      color: '#F97316',
+      img: waterImg,
+      stats: '85 Systems'
     }
   ];
 
   return (
     <div className="home-page">
-      {/* 1. Hero Section (Video / Image + CTA) */}
-      <section className="hero-section-new">
-        <div className="hero-overlay"></div>
-        {/* Placeholder for video/image background */}
-        <div className="hero-bg-image" style={{ backgroundImage: `url(${heroImg})` }}></div>
-        
-        <div className="container hero-content-new">
-          <motion.div 
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-          >
-            <h1 className="hero-title-new">Together We Can Change Lives</h1>
-            <p className="hero-text-new">
-              Join Hope Rise Foundation in our mission to empower communities, protect the environment, and provide essential healthcare and education to those who need it most.
-            </p>
-            <div className="hero-btns-new">
-              <a href="/donate" className="btn btn-primary btn-large">
-                Donate Now <Heart size={18} fill="white" />
-              </a>
-              <a href="/volunteer" className="btn btn-outline btn-outline-white btn-large">
-                Join Us <Users size={18} />
-              </a>
-            </div>
-          </motion.div>
-        </div>
-      </section>
+      {/* 1. Modern Hero Section */}
+      <Hero />
 
-      {/* 2. Stakeholder Section (Smart Routing UI) */}
+      {/* Organic Divider */}
+      <div className="section-divider divider-top">
+        <svg viewBox="0 0 1440 60" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M0 60L60 52.5C120 45 240 30 360 22.5C480 15 600 15 720 22.5C840 30 960 45 1080 52.5C1200 60 1320 75 1380 82.5L1440 90V0H1380C1320 0 1200 0 1080 0C960 0 840 0 720 0C600 0 480 0 360 0C240 0 120 0 60 0H0V60Z" fill="white"/>
+        </svg>
+      </div>
+
+      {/* 2. Stakeholder Section */}
       <StakeholderSection />
 
       {/* 3. About Section (Zig-Zag Style) */}
       <ZigZagAbout />
 
-      {/* 4. Impact Counter (Animated) */}
-      {/* 4. Impact Counter (Animated) */}
-      <section className="section" style={{ backgroundColor: 'var(--color-primary)', color: 'white' }}>
-        <div className="container">
-          <div className="text-center mb-48">
-            <span className="sub-title" style={{ color: 'rgba(255,255,255,0.9)', fontWeight: '600' }}>Community Impact</span>
-            <h2 className="section-title" style={{ color: 'white' }}>Numbers That Matter</h2>
+      {/* 4. Cinematic Impact Counter */}
+      <section className="cinematic-stats">
+        <div className="stats-bg-text">IMPACT</div>
+        <div className="container relative z-10">
+          <div className="text-center mb-40">
+            <fMotion.span 
+              initial={{ opacity: 0 }}
+              whileInView={{ opacity: 1 }}
+              className="stats-sub"
+            >
+              Our Global Footprint
+            </fMotion.span>
+            <fMotion.h2 
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              className="stats-title"
+            >
+              Numbers That <span className="text-white">Tell Our Story</span>
+            </fMotion.h2>
           </div>
-          <ImpactStats stats={stats} />
-        </div>
-      </section>
-
-      {/* 5. Programs Section (Card Grid) */}
-      <section className="section programs-section bg-bg-subtle">
-        <div className="container">
-          <div className="text-center mb-48">
-            <span className="sub-title">Our Focus Areas</span>
-            <h2 className="section-title">Programs Making a Difference</h2>
-          </div>
-
-          <div className="grid-3">
-            {programs.map((p, i) => (
-              <AnimatedSection key={i} delay={i * 0.1}>
-                <div className="program-card card p-0">
-                  <div className="program-img-wrapper">
-                    <img src={p.img} alt={p.title} className="program-img-new" />
-                  </div>
-                  <div className="program-body-new p-24">
-                    <h3 className="mb-8">{p.title}</h3>
-                    <p className="text-muted mb-16 text-small">{p.desc}</p>
-                    <a href="/programs" className="link-btn-new" style={{ color: p.color }}>
-                      Read More <ArrowRight size={16} />
-                    </a>
-                  </div>
-                </div>
-              </AnimatedSection>
+          
+          <div className="stats-grid-v2">
+            {stats.map((s, i) => (
+              <fMotion.div 
+                key={i}
+                initial={{ opacity: 0, scale: 0.9 }}
+                whileInView={{ opacity: 1, scale: 1 }}
+                transition={{ delay: i * 0.1 }}
+                className="stat-card-v2"
+              >
+                <div className="stat-icon-v2">{s.icon}</div>
+                <div className="stat-value-v2">{s.value}</div>
+                <div className="stat-label-v2">{s.label}</div>
+              </fMotion.div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* 6. Journey Timeline (Mixed Style) */}
+      {/* 5. Modern "Action Area" Showcase */}
+      <section className="action-area-v4">
+        <div className="container">
+          <div className="header-flex mb-48">
+            <div className="left">
+              <span className="modern-sub-v4">Action Areas</span>
+              <h2 className="modern-title-v4">Programs <span className="text-primary">Changing Reality</span></h2>
+            </div>
+            <div className="right">
+              <a href="/programs" className="view-all-v4">
+                View All Initiatives <ArrowRight size={20} />
+              </a>
+            </div>
+          </div>
+
+          <div className="programs-scroll-v4">
+            {programs.map((p, i) => (
+              <fMotion.div 
+                key={p.id}
+                className="program-panel-v4"
+                initial={{ opacity: 0, x: 40 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                transition={{ delay: i * 0.15 }}
+              >
+                <div className="panel-visual">
+                  <img src={i === 0 ? "https://images.unsplash.com/photo-1509062522246-3755977927d7?auto=format&fit=crop&q=80&w=1200" : i === 1 ? "https://images.unsplash.com/photo-1584515154018-4716f1bc3977?auto=format&fit=crop&q=80&w=1200" : "https://images.unsplash.com/photo-1542601906990-b4d3fb778b09?auto=format&fit=crop&q=80&w=1200"} alt={p.title} />
+                  <div className="panel-tag-v4" style={{ backgroundColor: p.color }}>
+                    {p.tag}
+                  </div>
+                </div>
+                
+                <div className="panel-content">
+                  <div className="panel-icon-v4" style={{ color: p.color }}>
+                    {p.icon}
+                  </div>
+                  <h3 className="panel-title">{p.title}</h3>
+                  <p className="panel-desc">{p.desc}</p>
+                  
+                  <div className="panel-footer-v4">
+                    <div className="panel-stat">
+                      <Target size={14} /> <span>{p.stats}</span>
+                    </div>
+                    <a href="/programs" className="panel-link-v4">
+                      Explore <ArrowRight size={16} />
+                    </a>
+                  </div>
+                </div>
+              </fMotion.div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* 6. Journey Timeline */}
       <JourneyTimeline />
 
-      {/* 7. Storytelling Section (Parallax Scroll) */}
+      {/* 7. Storytelling Section */}
       <ParallaxStory />
 
-      {/* 8. Events Section (Timeline + Calendar Cards) */}
+      {/* 8. Events Section */}
       <EventsSection />
 
-      {/* 9. How We Work (Step Process Design) */}
+      {/* 9. How We Work */}
       <StepProcess />
 
-      {/* 10. Testimonials (Slider) */}
+      {/* 10. Testimonials */}
       <TestimonialsSlider />
 
-      {/* 11. Partners / Sponsors */}
+      {/* 11. Partners Strip */}
       <PartnersStrip />
 
-      {/* 12. CTA Section (Strong Conversion) */}
+      {/* 12. CTA Section */}
       <CTABanner />
 
-      <style>{`
-        /* Hero Styles */
-        .hero-section-new {
+      <style jsx>{`
+        .home-page {
+          background-color: #fff;
+        }
+
+        .section-divider {
+          width: 100%;
+          line-height: 0;
+          margin-top: -1px;
+        }
+
+        /* Cinematic Stats */
+        .cinematic-stats {
           position: relative;
-          height: 100vh;
-          min-height: 600px;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          color: white;
-          text-align: center;
+          padding: 60px 0;
+          background: var(--color-primary-dark);
           overflow: hidden;
-        }
-
-        .hero-bg-image {
-          position: absolute;
-          top: 0;
-          left: 0;
-          width: 100%;
-          height: 100%;
-          background-size: cover;
-          background-position: center;
-          z-index: 0;
-          /* Darken the image heavily so it looks like a premium background */
-          filter: brightness(0.6);
-        }
-
-        .hero-overlay {
-          position: absolute;
-          top: 0;
-          left: 0;
-          width: 100%;
-          height: 100%;
-          background: linear-gradient(to bottom, rgba(17, 24, 39, 0.4), rgba(17, 24, 39, 0.8));
-          z-index: 1;
-        }
-
-        .hero-content-new {
-          position: relative;
-          z-index: 10;
-          max-width: 800px;
-        }
-
-        .hero-title-new {
-          font-size: 64px;
           color: white;
-          margin-bottom: 24px;
-          line-height: 1.1;
         }
 
-        .hero-text-new {
-          font-size: 20px;
-          opacity: 0.9;
-          margin-bottom: 40px;
-          line-height: 1.6;
+        .stats-bg-text {
+          position: absolute;
+          top: 50%;
+          left: 50%;
+          transform: translate(-50%, -50%);
+          font-size: 25vw;
+          font-weight: 900;
+          color: rgba(255,255,255,0.03);
+          z-index: 0;
+          pointer-events: none;
         }
 
-        .hero-btns-new {
-          display: flex;
-          justify-content: center;
+        .stats-sub {
+          display: block;
+          font-weight: 700;
+          text-transform: uppercase;
+          letter-spacing: 0.2em;
+          color: var(--color-primary-light);
+          font-size: 14px;
+          margin-bottom: 12px;
+        }
+
+        .stats-title {
+          font-size: 36px;
+          font-weight: 800;
+          color: rgba(255,255,255,0.8);
+        }
+
+        .stats-grid-v2 {
+          display: grid;
+          grid-template-columns: repeat(4, 1fr);
           gap: 24px;
         }
 
-        .btn-large {
-          padding: 16px 32px;
-          font-size: 18px;
+        .stat-card-v2 {
+          text-align: center;
+          padding: 32px 16px;
+          background: rgba(255,255,255,0.05);
+          border: 1px solid rgba(255,255,255,0.1);
+          border-radius: 20px;
+          backdrop-filter: blur(10px);
+          transition: all 0.3s ease;
         }
 
-        .btn-outline-white {
-          border-color: white;
-          color: white;
+        .stat-card-v2:hover {
+          background: rgba(255,255,255,0.1);
+          transform: translateY(-8px);
         }
 
-        .btn-outline-white:hover {
-          background-color: white;
+        .stat-icon-v2 {
+          color: var(--color-accent);
+          margin-bottom: 16px;
+          display: flex;
+          justify-content: center;
+        }
+
+        .stat-value-v2 {
+          font-size: 32px;
+          font-weight: 800;
+          margin-bottom: 4px;
+        }
+
+        .stat-label-v2 {
+          font-size: 12px;
+          font-weight: 600;
+          color: rgba(255,255,255,0.6);
+          text-transform: uppercase;
+        }
+
+        /* Action Area v4 */
+        .action-area-v4 {
+          padding: 60px 0;
+          background: #fff;
+        }
+
+        .header-flex {
+          display: flex;
+          justify-content: space-between;
+          align-items: flex-end;
+          border-bottom: 1px solid var(--color-border);
+          padding-bottom: 24px;
+        }
+
+        .modern-sub-v4 {
+          display: block;
+          font-weight: 800;
+          text-transform: uppercase;
+          letter-spacing: 0.1em;
+          color: var(--color-primary);
+          font-size: 13px;
+          margin-bottom: 8px;
+        }
+
+        .modern-title-v4 {
+          font-size: 36px;
+          font-weight: 800;
           color: var(--color-text-heading);
+          margin: 0;
         }
 
-        /* Program Card overrides for this page */
-        .p-0 { padding: 0 !important; overflow: hidden; }
-        .p-24 { padding: 24px; }
-        
-        .program-img-wrapper {
-          width: 100%;
-          height: 200px;
+        .view-all-v4 {
+          display: flex;
+          align-items: center;
+          gap: 10px;
+          font-weight: 700;
+          color: var(--color-text-main);
+          text-decoration: none;
+          font-size: 15px;
+          transition: color 0.3s;
+        }
+
+        .view-all-v4:hover { color: var(--color-primary); }
+
+        .programs-scroll-v4 {
+          display: grid;
+          grid-template-columns: repeat(3, 1fr);
+          gap: 32px;
+          margin-top: 40px;
+        }
+
+        .program-panel-v4 {
+          background: white;
+          border-radius: 24px;
           overflow: hidden;
+          border: 1px solid var(--color-border);
+          transition: all 0.4s ease;
         }
 
-        .program-img-new {
+        .program-panel-v4:hover {
+          transform: translateY(-10px);
+          box-shadow: 0 20px 40px rgba(0,0,0,0.05);
+          border-color: var(--color-primary-light);
+        }
+
+        .panel-visual {
+          height: 180px;
+          position: relative;
+        }
+
+        .panel-visual img {
           width: 100%;
           height: 100%;
           object-fit: cover;
-          transition: transform 0.5s ease;
         }
 
-        .program-card:hover .program-img-new {
-          transform: scale(1.05);
-        }
-
-        .link-btn-new {
-          display: inline-flex;
-          align-items: center;
-          gap: 8px;
-          font-weight: 700;
-          font-size: 14px;
+        .panel-tag-v4 {
+          position: absolute;
+          bottom: 12px;
+          left: 12px;
+          padding: 4px 12px;
+          color: white;
+          border-radius: 100px;
+          font-size: 11px;
+          font-weight: 800;
           text-transform: uppercase;
-          letter-spacing: 0.5px;
         }
 
-        .link-btn-new:hover {
-          gap: 12px;
+        .panel-content {
+          padding: 24px;
         }
 
-        /* Impact Stats — removed green-bg overrides */
+        .panel-icon-v4 {
+          margin-bottom: 16px;
+        }
 
-        @media (max-width: 768px) {
-          .hero-title-new { font-size: 36px; }
-          .hero-text-new { font-size: 16px; margin-bottom: 32px; }
-          .hero-btns-new { flex-direction: column; gap: 12px; width: 100%; max-width: 300px; margin: 0 auto; }
-          .btn-large { width: 100%; padding: 12px 24px; font-size: 16px; }
+        .panel-title {
+          font-size: 22px;
+          font-weight: 800;
+          color: var(--color-text-heading);
+          margin-bottom: 12px;
+        }
+
+        .panel-desc {
+          font-size: 14px;
+          color: var(--color-text-muted);
+          line-height: 1.5;
+          margin-bottom: 24px;
+          height: 63px;
+          overflow: hidden;
+          display: -webkit-box;
+          -webkit-line-clamp: 3;
+          -webkit-box-orient: vertical;
+        }
+
+        .panel-footer-v4 {
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          padding-top: 16px;
+          border-top: 1px solid var(--color-border);
+        }
+
+        .panel-stat {
+          display: flex;
+          align-items: center;
+          gap: 6px;
+          font-size: 12px;
+          font-weight: 700;
+          color: var(--color-text-main);
+        }
+
+        .panel-link-v4 {
+          display: flex;
+          align-items: center;
+          gap: 6px;
+          font-weight: 700;
+          color: var(--color-primary);
+          text-decoration: none;
+          font-size: 14px;
+        }
+
+        @media (max-width: 1024px) {
+          .programs-scroll-v4 { grid-template-columns: 1fr; }
+          .header-flex { flex-direction: column; align-items: flex-start; gap: 20px; }
         }
       `}</style>
     </div>

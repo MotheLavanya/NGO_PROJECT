@@ -1,211 +1,290 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Quote, ChevronLeft, ChevronRight } from 'lucide-react';
+import { Quote, ChevronLeft, ChevronRight, Star } from 'lucide-react';
 
 const testimonials = [
   {
-    text: "Hope Rise Foundation didn't just give my children books; they gave them the confidence to dream. The learning center changed our entire village.",
+    text: "Hope Rise Foundation didn't just give my children books; they gave them the confidence to dream. The learning center changed our entire village's perspective on education.",
     author: "Lakshmi Devi",
-    role: "Mother of 3, Beneficiary",
-    image: "https://images.unsplash.com/photo-1531123897727-8f129e1bfa8ea?auto=format&fit=crop&q=80&w=150"
+    role: "Mother of 3, Village Beneficiary",
+    image: "https://images.unsplash.com/photo-1531123897727-8f129e1bfa8ea?auto=format&fit=crop&q=80&w=800",
+    rating: 5
   },
   {
-    text: "Volunteering here has been the most fulfilling experience of my life. The organization is incredibly transparent and genuinely cares about impact.",
+    text: "Volunteering here has been the most fulfilling experience of my life. The organization is incredibly transparent and genuinely cares about grassroots impact.",
     author: "Rahul Sharma",
-    role: "Weekend Volunteer",
-    image: "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&q=80&w=150"
+    role: "Impact Volunteer",
+    image: "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&q=80&w=800",
+    rating: 5
   },
   {
-    text: "As a corporate partner, we look for NGOs with measurable outcomes. Hope Rise consistently delivers transparent reports and real, tangible change.",
+    text: "As a corporate partner, we look for NGOs with measurable outcomes. Hope Rise consistently delivers transparent reports and real, tangible change in remote sectors.",
     author: "Sarah Jenkins",
-    role: "CSR Director, TechCorp",
-    image: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&q=80&w=150"
+    role: "CSR Director, Global Tech",
+    image: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&q=80&w=800",
+    rating: 5
   }
 ];
 
 const TestimonialsSlider = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
 
-  // Auto-advance
   useEffect(() => {
     const timer = setInterval(() => {
       setCurrentIndex((prev) => (prev + 1) % testimonials.length);
-    }, 6000);
+    }, 8000);
     return () => clearInterval(timer);
   }, []);
 
-  const handleNext = () => {
-    setCurrentIndex((prev) => (prev + 1) % testimonials.length);
-  };
-
-  const handlePrev = () => {
-    setCurrentIndex((prev) => (prev - 1 + testimonials.length) % testimonials.length);
-  };
+  const handleNext = () => setCurrentIndex((prev) => (prev + 1) % testimonials.length);
+  const handlePrev = () => setCurrentIndex((prev) => (prev - 1 + testimonials.length) % testimonials.length);
 
   return (
-    <section className="section section-bg">
+    <section className="cinematic-testimonials">
       <div className="container">
-        <div className="text-center mb-48">
-          <span className="sub-title">Voices of Impact</span>
-          <h2 className="section-title">What People Say About Us</h2>
-        </div>
-
-        <div className="testimonial-container">
-          <button className="slider-btn prev" onClick={handlePrev}>
-            <ChevronLeft size={24} />
-          </button>
-
-          <div className="testimonial-content-wrapper">
+        <div className="testimonial-grid">
+          {/* Left Side: Large Portrait */}
+          <div className="portrait-side">
             <AnimatePresence mode="wait">
               <motion.div
                 key={currentIndex}
-                className="testimonial-card card"
-                initial={{ opacity: 0, x: 50 }}
-                animate={{ opacity: 1, x: 0 }}
-                exit={{ opacity: 0, x: -50 }}
-                transition={{ duration: 0.3 }}
+                initial={{ opacity: 0, scale: 0.9, rotate: -2 }}
+                animate={{ opacity: 1, scale: 1, rotate: 0 }}
+                exit={{ opacity: 0, scale: 1.1, rotate: 2 }}
+                transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
+                className="main-portrait"
               >
-                <div className="quote-icon">
-                  <Quote size={40} color="var(--color-primary-light)" />
-                </div>
-                <p className="testimonial-text">"{testimonials[currentIndex].text}"</p>
-                <div className="testimonial-author">
-                  <img 
-                    src={testimonials[currentIndex].image} 
-                    alt={testimonials[currentIndex].author} 
-                    className="author-img"
-                  />
-                  <div>
-                    <h4>{testimonials[currentIndex].author}</h4>
-                    <span className="text-small text-muted">{testimonials[currentIndex].role}</span>
-                  </div>
-                </div>
+                <img src={testimonials[currentIndex].image} alt={testimonials[currentIndex].author} />
+                <div className="portrait-overlay"></div>
               </motion.div>
             </AnimatePresence>
+            
+            {/* Navigation Floating Buttons */}
+            <div className="floating-nav">
+              <button onClick={handlePrev} className="nav-btn"><ChevronLeft size={20} /></button>
+              <button onClick={handleNext} className="nav-btn"><ChevronRight size={20} /></button>
+            </div>
           </div>
 
-          <button className="slider-btn next" onClick={handleNext}>
-            <ChevronRight size={24} />
-          </button>
-        </div>
+          {/* Right Side: Content */}
+          <div className="content-side">
+            <motion.div 
+              initial={{ opacity: 0, x: 20 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              className="testimonial-info"
+            >
+              <span className="modern-sub">Voices of Impact</span>
+              <h2 className="modern-title">Community <span className="text-highlight">Stories</span></h2>
+              
+              <AnimatePresence mode="wait">
+                <motion.div
+                  key={currentIndex}
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: -20 }}
+                  transition={{ duration: 0.5 }}
+                  className="quote-block"
+                >
+                  <div className="stars-row">
+                    {[...Array(testimonials[currentIndex].rating)].map((_, i) => (
+                      <Star key={i} size={16} fill="var(--color-accent)" color="var(--color-accent)" />
+                    ))}
+                  </div>
+                  
+                  <Quote size={40} className="quote-icon-v2" />
+                  <p className="main-quote">"{testimonials[currentIndex].text}"</p>
+                  
+                  <div className="author-details">
+                    <h4 className="author-name">{testimonials[currentIndex].author}</h4>
+                    <p className="author-role">{testimonials[currentIndex].role}</p>
+                  </div>
+                </motion.div>
+              </AnimatePresence>
 
-        <div className="slider-dots">
-          {testimonials.map((_, index) => (
-            <button 
-              key={index} 
-              className={`dot ${index === currentIndex ? 'active' : ''}`}
-              onClick={() => setCurrentIndex(index)}
-            />
-          ))}
+              <div className="progress-bar-container">
+                {testimonials.map((_, i) => (
+                  <div 
+                    key={i} 
+                    className={`progress-pill ${i === currentIndex ? 'active' : ''}`}
+                    onClick={() => setCurrentIndex(i)}
+                  />
+                ))}
+              </div>
+            </motion.div>
+          </div>
         </div>
       </div>
 
-      <style>{`
-        .testimonial-container {
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          gap: 24px;
-          max-width: 900px;
-          margin: 0 auto;
-        }
-
-        .testimonial-content-wrapper {
-          flex: 1;
+      <style jsx>{`
+        .cinematic-testimonials {
+          padding: 80px 0;
+          background: #fff;
           overflow: hidden;
         }
 
-        .testimonial-card {
-          padding: 48px;
-          text-align: center;
-          position: relative;
-        }
-
-        .quote-icon {
-          position: absolute;
-          top: 24px;
-          left: 50%;
-          transform: translateX(-50%);
-          z-index: 0;
-        }
-
-        .testimonial-text {
-          font-size: 20px;
-          line-height: 1.6;
-          color: var(--color-text-main);
-          font-style: italic;
-          margin-bottom: 32px;
-          position: relative;
-          z-index: 1;
-        }
-
-        .testimonial-author {
-          display: flex;
+        .testimonial-grid {
+          display: grid;
+          grid-template-columns: 0.9fr 1.1fr;
+          gap: 80px;
           align-items: center;
-          justify-content: center;
-          gap: 16px;
         }
 
-        .author-img {
-          width: 50px;
-          height: 50px;
-          border-radius: 50%;
+        .portrait-side {
+          position: relative;
+        }
+
+        .main-portrait {
+          width: 100%;
+          aspect-ratio: 4/5;
+          border-radius: 40px;
+          overflow: hidden;
+          box-shadow: 0 40px 80px -20px rgba(0,0,0,0.15);
+        }
+
+        .main-portrait img {
+          width: 100%;
+          height: 100%;
           object-fit: cover;
         }
 
-        .testimonial-author h4 {
-          margin-bottom: 0;
-          font-size: 16px;
+        .portrait-overlay {
+          position: absolute;
+          inset: 0;
+          background: linear-gradient(to top, rgba(22, 163, 74, 0.2), transparent);
+          mix-blend-mode: overlay;
         }
 
-        .slider-btn {
-          width: 48px;
-          height: 48px;
-          border-radius: 50%;
+        .floating-nav {
+          position: absolute;
+          bottom: 40px;
+          right: -30px;
+          display: flex;
+          gap: 12px;
+          z-index: 10;
+        }
+
+        .nav-btn {
+          width: 60px;
+          height: 60px;
+          background: white;
           border: 1px solid var(--color-border);
-          background: var(--color-white);
+          border-radius: 20px;
           display: flex;
           align-items: center;
           justify-content: center;
           cursor: pointer;
-          color: var(--color-text-main);
-          transition: var(--transition);
-          flex-shrink: 0;
+          transition: all 0.3s ease;
+          box-shadow: var(--shadow-lg);
         }
 
-        .slider-btn:hover {
+        .nav-btn:hover {
           background: var(--color-primary);
-          color: var(--color-white);
+          color: white;
           border-color: var(--color-primary);
+          transform: translateY(-5px);
         }
 
-        .slider-dots {
+        .content-side {
+          position: relative;
+        }
+
+        .stars-row {
           display: flex;
-          justify-content: center;
-          gap: 8px;
+          gap: 4px;
+          margin-bottom: 24px;
+        }
+
+        .quote-icon-v2 {
+          color: var(--color-primary-light);
+          margin-bottom: 20px;
+          opacity: 0.6;
+        }
+
+        .main-quote {
+          font-size: 24px;
+          font-weight: 600;
+          line-height: 1.4;
+          color: var(--color-text-heading);
+          margin-bottom: 24px;
+          font-family: var(--font-heading);
+        }
+
+        .author-details {
+          border-left: 4px solid var(--color-primary);
+          padding-left: 24px;
+        }
+
+        .author-name {
+          font-size: 20px;
+          font-weight: 800;
+          margin-bottom: 4px;
+        }
+
+        .author-role {
+          font-size: 14px;
+          color: var(--color-text-muted);
+          font-weight: 600;
+          text-transform: uppercase;
+          letter-spacing: 1px;
+        }
+
+        .progress-bar-container {
+          display: flex;
+          gap: 12px;
           margin-top: 32px;
         }
 
-        .dot {
-          width: 10px;
-          height: 10px;
-          border-radius: 50%;
+        .progress-pill {
+          height: 6px;
+          width: 40px;
           background: var(--color-border);
-          border: none;
+          border-radius: 10px;
           cursor: pointer;
-          transition: var(--transition);
+          transition: all 0.4s ease;
         }
 
-        .dot.active {
+        .progress-pill.active {
           background: var(--color-primary);
-          width: 24px;
-          border-radius: 5px;
+          width: 80px;
         }
 
-        @media (max-width: 768px) {
-          .testimonial-card { padding: 32px 24px; }
-          .testimonial-text { font-size: 16px; }
-          .slider-btn { display: none; } /* Hide arrows on mobile, rely on dots/swipe ideally */
+        .modern-sub {
+          display: block;
+          font-weight: 800;
+          text-transform: uppercase;
+          letter-spacing: 0.2em;
+          color: var(--color-primary);
+          font-size: 14px;
+          margin-bottom: 12px;
+        }
+
+        .modern-title {
+          font-size: 36px;
+          font-weight: 800;
+          color: var(--color-text-heading);
+          margin-bottom: 32px;
+        }
+
+        .text-highlight {
+          color: var(--color-primary);
+        }
+
+        @media (max-width: 1024px) {
+          .testimonial-grid {
+            grid-template-columns: 1fr;
+            gap: 60px;
+          }
+          .portrait-side {
+            max-width: 500px;
+            margin: 0 auto;
+          }
+          .floating-nav {
+            right: 20px;
+            bottom: -30px;
+          }
+          .main-quote {
+            font-size: 22px;
+          }
         }
       `}</style>
     </section>

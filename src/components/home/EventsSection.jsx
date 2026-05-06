@@ -1,132 +1,151 @@
 import React from 'react';
-import { Calendar, MapPin, ArrowRight } from 'lucide-react';
 import { motion } from 'framer-motion';
+import { ArrowRight, MapPin } from 'lucide-react';
 
 const events = [
-  {
-    date: '15',
-    month: 'Aug',
-    title: 'Independence Day Health Camp',
-    location: 'Warangal District',
-    description: 'Free comprehensive health checkups for over 500 residents.'
-  },
-  {
-    date: '05',
-    month: 'Sep',
-    title: 'Teacher\'s Day Book Drive',
-    location: 'Hyderabad Headquarters',
-    description: 'Collecting and distributing 10,000 books for rural schools.'
-  },
-  {
-    date: '22',
-    month: 'Oct',
-    title: 'Clean Water Initiative Launch',
-    location: 'Nalgonda',
-    description: 'Inauguration of 5 new solar-powered water filtration plants.'
-  }
+  { date: '24', mon: 'May', title: 'Annual Charity Gala 2026', loc: 'Hyderabad' },
+  { date: '12', mon: 'Jun', title: 'Rural Education Workshop', loc: 'Warangal' },
+  { date: '05', mon: 'Jul', title: 'Clean Water Initiative', loc: 'Adilabad' },
+  { date: '18', mon: 'Aug', title: 'Health for All Camp', loc: 'Nizamabad' }
 ];
 
 const EventsSection = () => {
   return (
-    <section className="section bg-white">
+    <section className="extreme-simple-events-v12">
       <div className="container">
-        <div className="flex-header mb-48">
-          <div>
-            <span className="sub-title">Upcoming Events</span>
-            <h2 className="section-title mb-0">Join Us on the Ground</h2>
-          </div>
-          <button className="btn btn-outline">View All Events</button>
+        
+        <div className="v12-header">
+          <h2 className="v12-h2">Upcoming <span className="text-primary">Events</span></h2>
+          <a href="/events" className="v12-all">View All Events</a>
         </div>
 
-        <div className="grid-3">
-          {events.map((event, index) => (
+        <div className="v12-list">
+          {events.map((event, i) => (
             <motion.div 
-              key={index} 
-              className="event-card card"
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: index * 0.1 }}
+              key={i}
+              className="v12-item"
+              initial={{ opacity: 0 }}
+              whileInView={{ opacity: 1 }}
+              transition={{ delay: i * 0.1 }}
             >
-              <div className="event-date bg-primary-light text-primary">
-                <span className="date-num">{event.date}</span>
-                <span className="date-month">{event.month}</span>
+              <div className="v12-date-side">
+                <span className="v12-day">{event.date}</span>
+                <span className="v12-mon">{event.mon}</span>
               </div>
-              <div className="event-details">
-                <h3 className="mb-8" style={{ fontSize: '20px' }}>{event.title}</h3>
-                <div className="event-meta text-muted text-small mb-16">
-                  <span style={{ display: 'flex', alignItems: 'center', gap: '4px' }}>
-                    <MapPin size={14} /> {event.location}
-                  </span>
+
+              <div className="v12-main-side">
+                <h3 className="v12-title">{event.title}</h3>
+                <div className="v12-loc">
+                  <MapPin size={14} /> {event.loc}
                 </div>
-                <p className="text-muted mb-24">{event.description}</p>
-                <a href="#" className="event-link text-primary" style={{ display: 'flex', alignItems: 'center', gap: '4px', fontWeight: 600 }}>
-                  Register Now <ArrowRight size={16} />
+              </div>
+
+              <div className="v12-action-side">
+                <a href="/register" className="v12-btn">
+                  Register <ArrowRight size={18} />
                 </a>
               </div>
             </motion.div>
           ))}
         </div>
+
       </div>
 
-      <style>{`
-        .flex-header {
+      <style jsx>{`
+        .extreme-simple-events-v12 {
+          padding: 60px 0;
+          background: #fff;
+        }
+
+        .v12-header {
           display: flex;
           justify-content: space-between;
-          align-items: flex-end;
-        }
-
-        .event-card {
-          display: flex;
-          gap: 20px;
-          align-items: flex-start;
-          padding: 24px;
-        }
-
-        .event-date {
-          display: flex;
-          flex-direction: column;
           align-items: center;
-          justify-content: center;
-          padding: 12px 16px;
-          border-radius: var(--radius-sm);
-          min-width: 70px;
-          text-align: center;
+          margin-bottom: 40px;
+          padding-bottom: 20px;
+          border-bottom: 1px solid #f5f5f5;
         }
 
-        .date-num {
+        .v12-h2 {
           font-size: 28px;
           font-weight: 800;
-          font-family: var(--font-heading);
+          color: var(--color-text-heading);
+          margin: 0;
+        }
+
+        .v12-all {
+          font-size: 14px;
+          font-weight: 700;
+          color: var(--color-text-muted);
+          text-decoration: none;
+          transition: color 0.3s;
+        }
+
+        .v12-all:hover { color: var(--color-primary); }
+
+        .v12-list {
+          display: flex;
+          flex-direction: column;
+        }
+
+        .v12-item {
+          display: grid;
+          grid-template-columns: 100px 1fr 150px;
+          align-items: center;
+          padding: 24px 0;
+          border-bottom: 1px solid #f5f5f5;
+          transition: all 0.3s ease;
+        }
+
+        .v12-item:last-child { border-bottom: none; }
+
+        .v12-date-side {
+          display: flex;
+          flex-direction: column;
           line-height: 1;
         }
 
-        .date-month {
-          font-size: 14px;
-          font-weight: 600;
-          text-transform: uppercase;
+        .v12-day { font-size: 28px; font-weight: 800; color: var(--color-text-heading); }
+        .v12-mon { font-size: 11px; font-weight: 800; text-transform: uppercase; color: var(--color-primary); margin-top: 4px; }
+
+        .v12-title {
+          font-size: 18px;
+          font-weight: 700;
+          color: var(--color-text-heading);
+          margin-bottom: 6px;
         }
 
-        .event-details h3 {
-          margin-top: -4px;
+        .v12-loc {
+          font-size: 13px;
+          color: var(--color-text-muted);
+          display: flex;
+          align-items: center;
+          gap: 6px;
+          font-weight: 600;
         }
+
+        .v12-action-side {
+          display: flex;
+          justify-content: flex-end;
+        }
+
+        .v12-btn {
+          display: flex;
+          align-items: center;
+          gap: 8px;
+          font-weight: 800;
+          color: var(--color-primary);
+          text-decoration: none;
+          font-size: 14px;
+          transition: transform 0.3s;
+        }
+
+        .v12-item:hover .v12-btn { transform: translateX(8px); }
 
         @media (max-width: 768px) {
-          .flex-header {
-            flex-direction: column;
-            align-items: flex-start;
-            gap: 24px;
-          }
-          .event-card {
-            flex-direction: column;
-          }
-          .event-date {
-            flex-direction: row;
-            gap: 8px;
-            width: auto;
-            min-width: auto;
-          }
-          .date-num { font-size: 24px; }
+          .v12-item { grid-template-columns: 80px 1fr; gap: 10px; }
+          .v12-action-side { display: none; }
+          .v12-h2 { font-size: 24px; }
         }
       `}</style>
     </section>
