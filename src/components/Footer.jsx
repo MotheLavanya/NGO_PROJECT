@@ -73,7 +73,14 @@ const Footer = () => {
         <div className="footer-divider"></div>
 
         <div className="footer-bottom-v2">
-          <p>&copy; {currentYear} Hope Rise Foundation. All Rights Reserved.</p>
+          <div className="footer-bottom-left">
+            <p>&copy; {currentYear} Hope Rise Foundation. All Rights Reserved.</p>
+            <div className="footer-legal-links">
+              <Link to="/privacy">Privacy Policy</Link>
+              <span className="dot-sep"></span>
+              <Link to="/terms">Terms of Service</Link>
+            </div>
+          </div>
           <div className="footer-legal">
             <span className="badge-legal">Reg No: 1234/2010</span>
             <span className="badge-legal">80G Tax Exempt</span>
@@ -81,7 +88,7 @@ const Footer = () => {
         </div>
       </div>
 
-      <style jsx>{`
+      <style>{`
         .premium-footer {
           background: #0f172a;
           color: white;
@@ -254,29 +261,68 @@ const Footer = () => {
           display: flex;
           justify-content: space-between;
           align-items: center;
-          color: rgba(255, 255, 255, 0.4);
+          padding-top: 30px;
+          flex-wrap: wrap;
+          gap: 20px;
+        }
+
+        .footer-bottom-left {
+          display: flex;
+          flex-direction: column;
+          gap: 8px;
+        }
+
+        .footer-bottom-left p {
+          margin: 0;
           font-size: 14px;
+          color: #94a3b8;
+        }
+
+        .footer-legal-links {
+          display: flex;
+          align-items: center;
+          gap: 12px;
+        }
+
+        .footer-legal-links a {
+          font-size: 13px;
+          color: #64748b;
+          text-decoration: none;
+          transition: color 0.3s;
+        }
+
+        .footer-legal-links a:hover {
+          color: var(--color-primary);
+        }
+
+        .dot-sep {
+          width: 4px;
+          height: 4px;
+          background: #334155;
+          border-radius: 50%;
         }
 
         .footer-legal {
           display: flex;
-          gap: 24px;
+          gap: 12px;
         }
 
         .badge-legal {
-          background: rgba(255, 255, 255, 0.05);
-          padding: 4px 12px;
-          border-radius: 8px;
-          font-size: 12px;
-        }
-
-        @media (max-width: 1024px) {
-          .footer-grid-v2 { grid-template-columns: 1fr 1fr; }
+          background: #1e293b;
+          color: #94a3b8;
+          font-size: 11px;
+          padding: 4px 10px;
+          border-radius: 100px;
+          border: 1px solid #334155;
+          font-weight: 600;
+          letter-spacing: 0.5px;
         }
 
         @media (max-width: 768px) {
-          .footer-grid-v2 { grid-template-columns: 1fr; }
-          .footer-bottom-v2 { flex-direction: column; gap: 24px; text-align: center; }
+          .footer-grid-v2 { grid-template-columns: 1fr; gap: 40px; }
+          .footer-bottom-v2 { flex-direction: column; text-align: center; }
+          .footer-bottom-left { align-items: center; }
+          .footer-legal { justify-content: center; }
         }
       `}</style>
     </footer>

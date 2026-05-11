@@ -83,7 +83,7 @@ const StepProcess = () => {
         </div>
       </div>
 
-      <style jsx>{`
+      <style>{`
         .modern-process {
           padding: 80px 0;
           background: #fff;

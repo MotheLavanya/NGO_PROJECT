@@ -25,10 +25,22 @@ const LanguageSelector = () => {
   const handleSelect = (lang) => {
     setSelected(lang);
     setOpen(false);
+    
+    // Attempt to find the hidden Google Translate combo box
     const googleCombo = document.querySelector('.goog-te-combo');
     if (googleCombo) {
       googleCombo.value = lang.code;
       googleCombo.dispatchEvent(new Event('change'));
+    } else {
+      console.warn("Translation engine not ready yet. Please try again in a moment.");
+      // Fallback: try to manually trigger if it appears after a tiny delay
+      setTimeout(() => {
+        const retryCombo = document.querySelector('.goog-te-combo');
+        if (retryCombo) {
+          retryCombo.value = lang.code;
+          retryCombo.dispatchEvent(new Event('change'));
+        }
+      }, 500);
     }
   };
 
@@ -146,7 +158,7 @@ const Navbar = () => {
         )}
       </AnimatePresence>
 
-      <style jsx>{`
+      <style>{`
         .classic-nav {
           position: fixed;
           top: 0; left: 0; right: 0;

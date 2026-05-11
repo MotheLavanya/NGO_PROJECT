@@ -1,5 +1,6 @@
 import React from 'react';
 import { motion as fMotion, AnimatePresence } from 'framer-motion';
+import { Link } from 'react-router-dom';
 import { ArrowRight, Heart, Users, Globe, BookOpen, Activity, Droplets, MapPin, Sparkles, Target } from 'lucide-react';
 import AnimatedSection from '../components/AnimatedSection';
 import ImpactStats from '../components/ImpactStats';
@@ -47,7 +48,7 @@ const HomePage = () => {
       desc: 'Mobile medical clinics and specialized health camps bringing vital services to remote tribal areas.',
       icon: <Activity size={24} />,
       color: '#2563EB',
-      img: healthImg,
+      img: "https://images.unsplash.com/photo-1576091160550-2173dba999ef?auto=format&fit=crop&q=80&w=800",
       stats: '12k Patients'
     },
     {
@@ -128,9 +129,9 @@ const HomePage = () => {
               <h2 className="modern-title-v4">Programs <span className="text-primary">Changing Reality</span></h2>
             </div>
             <div className="right">
-              <a href="/programs" className="view-all-v4">
+              <Link to="/programs" className="view-all-v4">
                 View All Initiatives <ArrowRight size={20} />
-              </a>
+              </Link>
             </div>
           </div>
 
@@ -144,7 +145,7 @@ const HomePage = () => {
                 transition={{ delay: i * 0.15 }}
               >
                 <div className="panel-visual">
-                  <img src={i === 0 ? "https://images.unsplash.com/photo-1509062522246-3755977927d7?auto=format&fit=crop&q=80&w=1200" : i === 1 ? "https://images.unsplash.com/photo-1584515154018-4716f1bc3977?auto=format&fit=crop&q=80&w=1200" : "https://images.unsplash.com/photo-1542601906990-b4d3fb778b09?auto=format&fit=crop&q=80&w=1200"} alt={p.title} />
+                  <img src={p.img} alt={p.title} />
                   <div className="panel-tag-v4" style={{ backgroundColor: p.color }}>
                     {p.tag}
                   </div>
@@ -161,9 +162,9 @@ const HomePage = () => {
                     <div className="panel-stat">
                       <Target size={14} /> <span>{p.stats}</span>
                     </div>
-                    <a href="/programs" className="panel-link-v4">
+                    <Link to="/programs" className="panel-link-v4">
                       Explore <ArrowRight size={16} />
-                    </a>
+                    </Link>
                   </div>
                 </div>
               </fMotion.div>
@@ -193,7 +194,7 @@ const HomePage = () => {
       {/* 12. CTA Section */}
       <CTABanner />
 
-      <style jsx>{`
+      <style>{`
         .home-page {
           background-color: #fff;
         }

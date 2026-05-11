@@ -41,7 +41,7 @@ const JourneyTimeline = () => {
   return (
     <section className="modern-journey">
       <div className="container">
-        <div className="text-center mb-48">
+        <div className="text-center mb-16">
           <span className="modern-sub">Our Legacy</span>
           <h2 className="modern-title">A Decade of <span className="text-highlight">Impact</span></h2>
         </div>
@@ -92,9 +92,9 @@ const JourneyTimeline = () => {
         </div>
       </div>
 
-      <style jsx>{`
+      <style>{`
         .modern-journey {
-          padding: 80px 0;
+          padding: 20px 0;
           background: #fff;
           position: relative;
           overflow: hidden;
@@ -131,7 +131,7 @@ const JourneyTimeline = () => {
 
         .story-block {
           position: relative;
-          margin-bottom: 100px;
+          margin-bottom: 30px;
           z-index: 1;
         }
 
@@ -151,7 +151,7 @@ const JourneyTimeline = () => {
         .story-flex {
           display: grid;
           grid-template-columns: 1fr 1fr;
-          gap: 60px;
+          gap: 20px;
           align-items: center;
         }
 
@@ -173,10 +173,10 @@ const JourneyTimeline = () => {
         .visual-frame {
           position: relative;
           width: 100%;
-          max-width: 400px;
-          aspect-ratio: 1;
-          border-radius: 40px;
-          padding: 15px;
+          max-width: 220px;
+          aspect-ratio: 1.2; /* Slightly flatter aspect ratio */
+          border-radius: 20px;
+          padding: 8px;
           background: white;
           box-shadow: 0 30px 60px rgba(0,0,0,0.1);
         }
@@ -185,7 +185,7 @@ const JourneyTimeline = () => {
           width: 100%;
           height: 100%;
           object-fit: cover;
-          border-radius: 30px;
+          border-radius: 15px;
         }
 
         .visual-icon {
@@ -217,17 +217,17 @@ const JourneyTimeline = () => {
         }
 
         .story-title {
-          font-size: 32px;
+          font-size: 24px;
           font-weight: 800;
           color: var(--color-text-heading);
-          margin-bottom: 20px;
+          margin-bottom: 12px;
         }
 
         .story-desc {
-          font-size: 18px;
-          line-height: 1.7;
+          font-size: 15px;
+          line-height: 1.5;
           color: var(--color-text-muted);
-          margin-bottom: 32px;
+          margin-bottom: 12px;
         }
 
         .story-footer {

@@ -11,7 +11,7 @@ const stakeholders = [
     description: 'Empowering change through strategic financial support. Every contribution is tracked with 100% transparency.',
     icon: <HeartHandshake size={32} />,
     color: '#16A34A',
-    image: 'https://images.unsplash.com/photo-1593113598332-cd288d649433?auto=format&fit=crop&q=80&w=1200'
+    image: 'https://images.unsplash.com/photo-1532629345422-7515f3d16bb6?auto=format&fit=crop&q=80&w=1200'
   },
   {
     id: 'volunteers',
@@ -20,7 +20,7 @@ const stakeholders = [
     description: 'Join a global network of dedicated change-makers. Your talent is the fuel for our community projects.',
     icon: <Users size={32} />,
     color: '#2563EB',
-    image: 'https://images.unsplash.com/photo-1559027615-cd2673675250?auto=format&fit=crop&q=80&w=1200'
+    image: 'https://images.unsplash.com/photo-1522202176988-66273c2fd55f?auto=format&fit=crop&q=80&w=1200'
   },
   {
     id: 'beneficiaries',
@@ -29,7 +29,7 @@ const stakeholders = [
     description: 'Unlocking potential through education and healthcare. Enrolling individuals into sustainable cycles of growth.',
     icon: <GraduationCap size={32} />,
     color: '#F97316',
-    image: 'https://images.unsplash.com/photo-1524069290683-0457abfe42c3?auto=format&fit=crop&q=80&w=1200'
+    image: 'https://images.unsplash.com/photo-1488521787991-ed7bbaae773c?auto=format&fit=crop&q=80&w=1200'
   }
 ];
 
@@ -108,7 +108,7 @@ const StakeholderSection = () => {
         </div>
       </div>
 
-      <style jsx>{`
+      <style>{`
         .engagement-portal-v3 {
           padding: 40px 0 60px; /* Reduced top padding */
           background: #fafafa;

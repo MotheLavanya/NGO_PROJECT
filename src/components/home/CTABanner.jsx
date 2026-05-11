@@ -53,7 +53,7 @@ const CTABanner = () => {
         </motion.div>
       </div>
 
-      <style jsx>{`
+      <style>{`
         .premium-cta-mini {
           padding: 60px 0;
           background: #fff;

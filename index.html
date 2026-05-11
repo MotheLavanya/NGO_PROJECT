@@ -6,14 +6,26 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Hope Rise Foundation | NGO</title>
     <script type="text/javascript">
-      function googleTranslateElementInit() {
-        new google.translate.TranslateElement({
-          pageLanguage: 'en',
-          includedLanguages: 'en,te,hi,ur,ta,ml,kn',
-          layout: google.translate.TranslateElement.InlineLayout.SIMPLE,
-          autoDisplay: false
-        }, 'google_translate_element');
+      window.googleTranslateElementInit = function() {
+        if (typeof google !== 'undefined' && google.translate) {
+          new google.translate.TranslateElement({
+            pageLanguage: 'en',
+            includedLanguages: 'en,te,hi,ur,ta,ml,kn',
+            autoDisplay: false
+          }, 'google_translate_element');
+          window.googleTranslateElementInit_Called = true;
+        }
       }
+      
+      // Force load the script if it fails to trigger
+      window.addEventListener('load', () => {
+        if (!window.googleTranslateElementInit_Called) {
+          const script = document.createElement('script');
+          script.src = 'https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit';
+          document.head.appendChild(script);
+          window.googleTranslateElementInit_Called = true;
+        }
+      });
 
       // Aggressively hide Google Translate UI
       (function() {
@@ -33,12 +45,18 @@
           const banner = document.querySelector('.goog-te-banner-frame');
           if (banner) banner.style.display = 'none';
           if (document.body) document.body.style.top = '0px';
-        }, 500);
+          
+          // Force init if not done
+          if (typeof google !== 'undefined' && google.translate && !window.googleTranslateElementInit_Called) {
+            window.googleTranslateElementInit();
+          }
+        }, 1000);
       })();
     </script>
-    <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+    <script type="text/javascript" src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
   </head>
   <body>
+    <div id="google_translate_element" style="position: fixed; top: -100px; left: -100px; width: 1px; height: 1px; overflow: hidden;"></div>
     <div id="root"></div>
     <script type="module" src="/src/main.jsx"></script>
   </body>

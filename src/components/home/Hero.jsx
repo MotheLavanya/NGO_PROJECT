@@ -1,17 +1,18 @@
 import React from 'react';
 import { motion } from 'framer-motion';
+import { Link } from 'react-router-dom';
 import { Heart, ArrowRight, ShieldCheck, Sparkles, Globe } from 'lucide-react';
 
 const Hero = () => {
   const images = [
-    "https://images.unsplash.com/photo-1488521787991-ed7bbaae773c?auto=format&fit=crop&q=80&w=400",
-    "https://images.unsplash.com/photo-1509062522246-3755977927d7?auto=format&fit=crop&q=80&w=400",
-    "https://images.unsplash.com/photo-1584515154018-4716f1bc3977?auto=format&fit=crop&q=80&w=400",
-    "https://images.unsplash.com/photo-1542601906990-b4d3fb778b09?auto=format&fit=crop&q=80&w=400",
-    "https://images.unsplash.com/photo-1532629345422-7515f3d16bb6?auto=format&fit=crop&q=80&w=400",
-    "https://images.unsplash.com/photo-1593113598332-cd288d649433?auto=format&fit=crop&q=80&w=400",
-    "https://images.unsplash.com/photo-1517677208171-0bc6725a3e60?auto=format&fit=crop&q=80&w=400",
-    "https://images.unsplash.com/photo-1518391846015-55a9cc003b25?auto=format&fit=crop&q=80&w=400",
+    "https://images.unsplash.com/photo-1469571486292-0ba58a3f068b?auto=format&fit=crop&q=80&w=600", // Care/Hands
+    "https://images.unsplash.com/photo-1532629345422-7515f3d16bb6?auto=format&fit=crop&q=80&w=600", // Water
+    "https://images.unsplash.com/photo-1542601906990-b4d3fb778b09?auto=format&fit=crop&q=80&w=600", // Environment/Sapling
+    "https://images.unsplash.com/photo-1497633762265-9d179a990aa6?auto=format&fit=crop&q=80&w=600", // Education/Books
+    "https://images.unsplash.com/photo-1576091160550-2173dba999ef?auto=format&fit=crop&q=80&w=600", // Healthcare
+    "https://images.unsplash.com/photo-1593113598332-cd288d649433?auto=format&fit=crop&q=80&w=600", // Community/Rural
+    "https://images.unsplash.com/photo-1522202176988-66273c2fd55f?auto=format&fit=crop&q=80&w=600", // Teamwork
+    "https://images.unsplash.com/photo-1511632765486-a01980e01a18?auto=format&fit=crop&q=80&w=600", // Kids/Hope
   ];
 
   return (
@@ -53,12 +54,12 @@ const Hero = () => {
             </motion.p>
 
             <div className="split-actions">
-              <a href="/donate" className="btn-s-primary">
+              <Link to="/donate" className="btn-s-primary">
                 Donate Now <Heart size={18} fill="currentColor" />
-              </a>
-              <a href="/about" className="btn-s-outline">
+              </Link>
+              <Link to="/about" className="btn-s-outline">
                 Our Story <ArrowRight size={18} />
-              </a>
+              </Link>
             </div>
 
             <div className="split-trust">
@@ -92,7 +93,7 @@ const Hero = () => {
                   <div 
                     key={idx} 
                     className="exact-ring-item"
-                    style={{ transform: `rotate(${idx * 45}deg) translateY(-210px)` }}
+                    style={{ transform: `rotate(${idx * 45}deg) translateY(var(--orbit-radius, -210px))` }}
                   >
                     <motion.div 
                       className="exact-img-box"
@@ -113,7 +114,7 @@ const Hero = () => {
         </div>
       </div>
 
-      <style jsx>{`
+      <style>{`
         .split-orbit-hero {
           position: relative;
           min-height: 90vh; /* Increased height for better clearance */
@@ -231,11 +232,12 @@ const Hero = () => {
 
         .exact-circle-container {
           position: relative;
-          width: 600px; /* Increased to avoid clipping */
+          width: 600px;
           height: 600px;
           display: flex;
           justify-content: center;
           align-items: center;
+          --orbit-radius: -210px;
         }
 
         .exact-circle-center {
@@ -310,14 +312,17 @@ const Hero = () => {
           .hero-split-text { display: flex; flex-direction: column; align-items: center; }
           .split-actions { justify-content: center; }
           .split-trust { justify-content: center; }
-          .hero-split-visual { margin-top: 60px; transform: scale(0.85); }
+          .hero-split-visual { margin-top: 60px; transform: scale(0.8); }
         }
 
         @media (max-width: 768px) {
-          .split-h1 { font-size: 36px; }
-          .exact-circle-container { width: 350px; height: 350px; }
-          .exact-img-box { width: 80px; height: 80px; }
-          .exact-guide-ring { width: 280px; height: 280px; }
+          .split-orbit-hero { padding: 60px 0; min-height: auto; }
+          .split-h1 { font-size: 32px; }
+          .exact-circle-container { width: 350px; height: 350px; --orbit-radius: -120px; }
+          .exact-circle-center { width: 140px; height: 140px; }
+          .exact-ring-item { width: 80px; height: 80px; }
+          .exact-img-box { width: 70px; height: 70px; }
+          .exact-guide-ring { width: 220px; height: 220px; }
         }
       `}</style>
     </section>

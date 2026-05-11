@@ -103,7 +103,7 @@ const ZigZagAbout = () => {
 
       </div>
 
-      <style jsx>{`
+      <style>{`
         .modern-zigzag {
           padding: 80px 0;
           background: #fff;
@@ -124,7 +124,8 @@ const ZigZagAbout = () => {
         /* Liquid Frame */
         .liquid-frame {
           position: relative;
-          width: 100%;
+          width: 85%; /* Reduced from 100% */
+          margin: 0 auto; /* Centered */
           aspect-ratio: 1;
           border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%;
           overflow: hidden;

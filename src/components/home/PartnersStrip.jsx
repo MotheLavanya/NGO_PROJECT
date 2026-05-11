@@ -47,7 +47,7 @@ const PartnersStrip = () => {
         </div>
       </div>
 
-      <style jsx>{`
+      <style>{`
         .modern-partners {
           padding: 60px 0;
           background: #fff;

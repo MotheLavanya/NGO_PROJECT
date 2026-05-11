@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import { Link } from 'react-router-dom';
 import { ArrowRight, Quote, ChevronUp, ChevronDown } from 'lucide-react';
 
 const stories = [
@@ -69,9 +70,9 @@ const ParallaxStory = () => {
                   <Quote size={32} className="quote-v3" />
                   <p className="story-p-v3">"{stories[index].text}"</p>
                   
-                  <a href="/impact" className="impact-link-v3">
+                  <Link to="/impact" className="impact-link-v3">
                     Learn More <ArrowRight size={18} />
-                  </a>
+                  </Link>
                 </motion.div>
               </AnimatePresence>
             </div>
@@ -108,7 +109,7 @@ const ParallaxStory = () => {
         </div>
       </div>
 
-      <style jsx>{`
+      <style>{`
         .vertical-stories-section {
           padding: 80px 0;
           background: #fafafa;
@@ -253,8 +254,10 @@ const ParallaxStory = () => {
         /* Visual Side */
         .vertical-story-visual {
           position: relative;
-          height: 550px;
-          border-radius: 40px;
+          height: 420px; /* Reduced from 550px */
+          width: 90%; /* Added to reduce width */
+          margin-left: auto; /* Aligned to right within its column */
+          border-radius: 30px; /* Slightly tighter radius */
           overflow: hidden;
           box-shadow: 0 40px 80px rgba(0,0,0,0.1);
         }

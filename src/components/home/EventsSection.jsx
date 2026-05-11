@@ -1,5 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
+import { Link } from 'react-router-dom';
 import { ArrowRight, MapPin } from 'lucide-react';
 
 const events = [
@@ -16,7 +17,7 @@ const EventsSection = () => {
         
         <div className="v12-header">
           <h2 className="v12-h2">Upcoming <span className="text-primary">Events</span></h2>
-          <a href="/events" className="v12-all">View All Events</a>
+          <Link to="/impact" className="v12-all">View Recent Impact</Link>
         </div>
 
         <div className="v12-list">
@@ -41,9 +42,9 @@ const EventsSection = () => {
               </div>
 
               <div className="v12-action-side">
-                <a href="/register" className="v12-btn">
+                <Link to="/volunteer" className="v12-btn">
                   Register <ArrowRight size={18} />
-                </a>
+                </Link>
               </div>
             </motion.div>
           ))}
@@ -51,7 +52,7 @@ const EventsSection = () => {
 
       </div>
 
-      <style jsx>{`
+      <style>{`
         .extreme-simple-events-v12 {
           padding: 60px 0;
           background: #fff;

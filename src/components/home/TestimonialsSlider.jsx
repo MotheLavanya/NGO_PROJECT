@@ -7,21 +7,21 @@ const testimonials = [
     text: "Hope Rise Foundation didn't just give my children books; they gave them the confidence to dream. The learning center changed our entire village's perspective on education.",
     author: "Lakshmi Devi",
     role: "Mother of 3, Village Beneficiary",
-    image: "https://images.unsplash.com/photo-1531123897727-8f129e1bfa8ea?auto=format&fit=crop&q=80&w=800",
+    image: "https://images.unsplash.com/photo-1488521787991-ed7bbaae773c?auto=format&fit=crop&q=80&w=800",
     rating: 5
   },
   {
     text: "Volunteering here has been the most fulfilling experience of my life. The organization is incredibly transparent and genuinely cares about grassroots impact.",
     author: "Rahul Sharma",
     role: "Impact Volunteer",
-    image: "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&q=80&w=800",
+    image: "https://images.unsplash.com/photo-1542810634-71277d95dcbb?auto=format&fit=crop&q=80&w=800",
     rating: 5
   },
   {
     text: "As a corporate partner, we look for NGOs with measurable outcomes. Hope Rise consistently delivers transparent reports and real, tangible change in remote sectors.",
     author: "Sarah Jenkins",
     role: "CSR Director, Global Tech",
-    image: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&q=80&w=800",
+    image: "https://images.unsplash.com/photo-1522202176988-66273c2fd55f?auto=format&fit=crop&q=80&w=800",
     rating: 5
   }
 ];
@@ -115,7 +115,7 @@ const TestimonialsSlider = () => {
         </div>
       </div>
 
-      <style jsx>{`
+      <style>{`
         .cinematic-testimonials {
           padding: 80px 0;
           background: #fff;
@@ -134,9 +134,10 @@ const TestimonialsSlider = () => {
         }
 
         .main-portrait {
-          width: 100%;
+          width: 80%; /* Reduced from 100% */
+          margin: 0 auto; /* Centered */
           aspect-ratio: 4/5;
-          border-radius: 40px;
+          border-radius: 30px; /* Tighter radius for smaller size */
           overflow: hidden;
           box-shadow: 0 40px 80px -20px rgba(0,0,0,0.15);
         }
