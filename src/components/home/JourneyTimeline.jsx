@@ -274,13 +274,12 @@ const JourneyTimeline = () => {
         }
 
         @media (max-width: 768px) {
-          .story-line { left: 30px; transform: none; }
-          .story-flex { grid-template-columns: 1fr; gap: 40px; direction: ltr !important; }
-          .story-flex.odd .content-inner { text-align: left; }
-          .story-block { padding-left: 70px; margin-bottom: 80px; }
-          .year-bg { display: none; }
-          .visual-frame { max-width: 100%; aspect-ratio: 4/3; }
-          .modern-title { font-size: 32px; }
+          .modern-journey { padding: 40px 0; }
+          .modern-title { font-size: 28px; }
+          .story-block { padding-left: 50px; }
+          .timeline-track { left: 30px; }
+          .story-h3 { font-size: 18px; }
+          .story-p { font-size: 14px; }
         }
       `}</style>
     </section>

@@ -428,6 +428,15 @@ const HomePage = () => {
         @media (max-width: 1024px) {
           .programs-scroll-v4 { grid-template-columns: 1fr; }
           .header-flex { flex-direction: column; align-items: flex-start; gap: 20px; }
+          .stats-grid-v2 { grid-template-columns: repeat(2, 1fr); gap: 20px; }
+          .stats-title { font-size: 32px; }
+        }
+
+        @media (max-width: 640px) {
+          .stats-grid-v2 { grid-template-columns: 1fr; }
+          .stats-bg-text { font-size: 40vw; }
+          .impact-stats-v2 { padding: 60px 20px; }
+          .stats-title { font-size: 28px; }
         }
       `}</style>
     </div>

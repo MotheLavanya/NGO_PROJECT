@@ -287,6 +287,14 @@ const TestimonialsSlider = () => {
             font-size: 22px;
           }
         }
+
+        @media (max-width: 768px) {
+          .cinematic-testimonials { padding: 60px 0; }
+          .modern-title { font-size: 28px; }
+          .main-quote { font-size: 18px; }
+          .text-side { padding: 0 20px; text-align: center; }
+          .author-info { justify-content: center; text-align: left; }
+        }
       `}</style>
     </section>
   );
