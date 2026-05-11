@@ -268,18 +268,50 @@ const JourneyTimeline = () => {
         }
 
         @media (max-width: 1024px) {
-          .story-flex { gap: 50px; }
+          .story-flex { gap: 40px; }
           .story-title { font-size: 24px; }
           .story-desc { font-size: 16px; }
         }
 
         @media (max-width: 768px) {
-          .modern-journey { padding: 40px 0; }
-          .modern-title { font-size: 28px; }
-          .story-block { padding-left: 50px; }
-          .timeline-track { left: 30px; }
-          .story-h3 { font-size: 18px; }
-          .story-p { font-size: 14px; }
+          .modern-journey { padding: 40px 15px; }
+          .modern-title { font-size: 26px; }
+          .story-line { left: 15px; }
+          .story-block { padding-left: 35px; margin-bottom: 50px; }
+          .story-flex { grid-template-columns: 1fr; gap: 20px; direction: ltr !important; }
+          
+          .story-flex.odd .story-visual, .story-flex.even .story-visual { order: 1; }
+          .story-flex.odd .story-content, .story-flex.even .story-content { order: 2; }
+          
+          .visual-frame { 
+            max-width: 100%; 
+            aspect-ratio: 16/9; 
+            margin-bottom: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+          }
+          
+          .visual-icon {
+            width: 48px;
+            height: 48px;
+            bottom: -15px;
+            right: 15px;
+            border-radius: 12px;
+            font-size: 14px;
+          }
+
+          .content-inner {
+            text-align: left !important;
+            padding: 0;
+          }
+
+          .story-title { font-size: 20px; margin-bottom: 10px; }
+          .story-desc { font-size: 14px; line-height: 1.6; }
+          .year-bg { display: none; }
+          
+          .story-footer {
+            margin-top: 15px;
+            font-size: 11px;
+          }
         }
       `}</style>
     </section>
