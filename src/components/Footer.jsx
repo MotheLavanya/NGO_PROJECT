@@ -1,30 +1,39 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Heart, Mail, Phone, MapPin, Send, Globe, Heart as HeartIcon, Sparkles as SparkleIcon, Users as UsersIcon, Link as LinkIcon } from 'lucide-react';
+import { Heart, Mail, Phone, MapPin, Send, Globe } from 'lucide-react';
+import { Facebook, Instagram, Linkedin, Twitter } from './BrandIcons';
 
 const Footer = () => {
   const currentYear = new Date().getFullYear();
+  const [subscribed, setSubscribed] = React.useState(false);
+  const [email, setEmail] = React.useState('');
+
+  const handleSubscribe = (e) => {
+    e.preventDefault();
+    if (email) {
+      setSubscribed(true);
+      setEmail('');
+    }
+  };
 
   return (
     <footer className="premium-footer">
-      {/* Removed Wave Divider for Space Efficiency */}
-
       <div className="container footer-main">
         <div className="footer-grid-v2">
           {/* Brand Info */}
           <div className="footer-col brand">
             <Link to="/" className="footer-logo">
-              <Heart size={32} fill="var(--color-primary)" />
+              <Heart size={28} fill="var(--color-primary)" />
               <span>Hope <span className="text-primary">Rise</span></span>
             </Link>
             <p className="footer-bio">
-              Empowering underprivileged communities through sustainable education and healthcare initiatives since 2010.
+              Empowering underprivileged communities through sustainable education and healthcare initiatives.
             </p>
             <div className="footer-socials">
-              <a href="#" className="social-pill" title="Social"><Globe size={20} /></a>
-              <a href="#" className="social-pill" title="Impact"><HeartIcon size={20} /></a>
-              <a href="#" className="social-pill" title="Community"><SparkleIcon size={20} /></a>
-              <a href="#" className="social-pill" title="Network"><LinkIcon size={20} /></a>
+              <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" className="social-pill" title="Facebook"><Facebook size={18} /></a>
+              <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" className="social-pill" title="Instagram"><Instagram size={18} /></a>
+              <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" className="social-pill" title="LinkedIn"><Linkedin size={18} /></a>
+              <a href="https://twitter.com" target="_blank" rel="noopener noreferrer" className="social-pill" title="Twitter"><Twitter size={18} /></a>
             </div>
           </div>
 
@@ -63,10 +72,24 @@ const Footer = () => {
           <div className="footer-col newsletter">
             <h4 className="footer-heading">Newsletter</h4>
             <p className="news-desc">Stay updated with our latest impact stories and events.</p>
-            <div className="newsletter-box">
-              <input type="email" placeholder="Email Address" />
-              <button className="news-btn"><Send size={18} /></button>
-            </div>
+            
+            {subscribed ? (
+              <div className="footer-success-msg">
+                <div className="success-check">✓</div>
+                <span>Welcome! You're now subscribed to our updates.</span>
+              </div>
+            ) : (
+              <form className="newsletter-box" onSubmit={handleSubscribe}>
+                <input 
+                  type="email" 
+                  placeholder="Email Address" 
+                  required
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                />
+                <button className="news-btn" type="submit"><Send size={18} /></button>
+              </form>
+            )}
           </div>
         </div>
 
@@ -92,73 +115,53 @@ const Footer = () => {
         .premium-footer {
           background: #0f172a;
           color: white;
-          padding-bottom: 40px;
+          padding-bottom: 24px;
           position: relative;
-        }
-
-        .footer-wave {
-          position: absolute;
-          top: 0;
-          left: 0;
-          width: 100%;
-          overflow: hidden;
-          line-height: 0;
-        }
-
-        .footer-wave svg {
-          position: relative;
-          display: block;
-          width: calc(100% + 1.3px);
-          height: 80px;
-        }
-
-        .footer-wave .shape-fill {
-          fill: #FFFFFF;
         }
 
         .footer-main {
-          padding-top: 60px;
+          padding-top: 40px;
         }
 
         .footer-grid-v2 {
           display: grid;
           grid-template-columns: 2fr 1fr 1.5fr 2fr;
-          gap: 40px;
-          margin-bottom: 40px;
+          gap: 30px;
+          margin-bottom: 30px;
         }
 
         .footer-logo {
           display: flex;
           align-items: center;
-          gap: 12px;
-          font-size: 24px;
+          gap: 10px;
+          font-size: 22px;
           font-weight: 800;
           color: white;
           text-decoration: none;
-          margin-bottom: 16px;
+          margin-bottom: 12px;
         }
 
         .footer-bio {
           color: rgba(255, 255, 255, 0.6);
-          font-size: 14px;
-          line-height: 1.6;
-          margin-bottom: 20px;
-          max-width: 300px;
+          font-size: 13px;
+          line-height: 1.5;
+          margin-bottom: 16px;
+          max-width: 280px;
         }
 
         .footer-socials {
           display: flex;
-          gap: 12px;
+          gap: 10px;
         }
 
         .social-pill {
-          width: 48px;
-          height: 48px;
+          width: 40px;
+          height: 40px;
           background: rgba(255, 255, 255, 0.05);
           display: flex;
           align-items: center;
           justify-content: center;
-          border-radius: 16px;
+          border-radius: 12px;
           color: white;
           transition: all 0.3s ease;
           border: 1px solid rgba(255, 255, 255, 0.1);
@@ -167,13 +170,13 @@ const Footer = () => {
         .social-pill:hover {
           background: var(--color-primary);
           border-color: var(--color-primary);
-          transform: translateY(-5px);
+          transform: translateY(-3px);
         }
 
         .footer-heading {
-          font-size: 16px;
+          font-size: 15px;
           font-weight: 800;
-          margin-bottom: 20px;
+          margin-bottom: 16px;
           color: white;
         }
 
@@ -215,28 +218,29 @@ const Footer = () => {
         .newsletter-box {
           display: flex;
           background: rgba(255, 255, 255, 0.05);
-          border-radius: 16px;
-          padding: 6px;
+          border-radius: 12px;
+          padding: 4px;
           border: 1px solid rgba(255, 255, 255, 0.1);
-          margin-top: 24px;
+          margin-top: 16px;
         }
 
         .newsletter-box input {
           flex: 1;
           background: transparent;
           border: none;
-          padding: 0 16px;
+          padding: 0 12px;
           color: white;
           outline: none;
+          font-size: 13px;
         }
 
         .news-btn {
-          width: 48px;
-          height: 48px;
+          width: 40px;
+          height: 40px;
           background: var(--color-primary);
           color: white;
           border: none;
-          border-radius: 12px;
+          border-radius: 8px;
           cursor: pointer;
           transition: all 0.3s ease;
         }
@@ -248,44 +252,72 @@ const Footer = () => {
 
         .news-desc {
           color: rgba(255, 255, 255, 0.6);
-          font-size: 14px;
+          font-size: 13px;
+        }
+
+        .footer-success-msg {
+          margin-top: 16px;
+          display: flex;
+          align-items: center;
+          gap: 10px;
+          background: rgba(34, 197, 94, 0.1);
+          padding: 10px 12px;
+          border-radius: 10px;
+          border: 1px solid rgba(34, 197, 94, 0.2);
+          color: #86efac;
+          font-size: 12px;
+          font-weight: 600;
+          line-height: 1.3;
+        }
+
+        .success-check {
+          width: 20px;
+          height: 20px;
+          background: var(--color-primary);
+          color: white;
+          border-radius: 50%;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          flex-shrink: 0;
+          font-size: 12px;
         }
 
         .footer-divider {
           height: 1px;
           background: rgba(255, 255, 255, 0.1);
-          margin-bottom: 24px;
+          margin-bottom: 16px;
         }
 
         .footer-bottom-v2 {
           display: flex;
           justify-content: space-between;
           align-items: center;
-          padding-top: 30px;
+          padding-top: 20px;
           flex-wrap: wrap;
-          gap: 20px;
+          gap: 16px;
         }
 
         .footer-bottom-left {
           display: flex;
           flex-direction: column;
-          gap: 8px;
+          gap: 4px;
         }
 
         .footer-bottom-left p {
           margin: 0;
-          font-size: 14px;
+          font-size: 13px;
           color: #94a3b8;
         }
 
         .footer-legal-links {
           display: flex;
           align-items: center;
-          gap: 12px;
+          gap: 10px;
         }
 
         .footer-legal-links a {
-          font-size: 13px;
+          font-size: 12px;
           color: #64748b;
           text-decoration: none;
           transition: color 0.3s;
@@ -296,22 +328,22 @@ const Footer = () => {
         }
 
         .dot-sep {
-          width: 4px;
-          height: 4px;
+          width: 3px;
+          height: 3px;
           background: #334155;
           border-radius: 50%;
         }
 
         .footer-legal {
           display: flex;
-          gap: 12px;
+          gap: 10px;
         }
 
         .badge-legal {
           background: #1e293b;
           color: #94a3b8;
-          font-size: 11px;
-          padding: 4px 10px;
+          font-size: 10px;
+          padding: 3px 8px;
           border-radius: 100px;
           border: 1px solid #334155;
           font-weight: 600;

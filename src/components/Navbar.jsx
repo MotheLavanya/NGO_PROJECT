@@ -93,6 +93,7 @@ const Navbar = () => {
     { name: 'About', path: '/about' },
     { name: 'Programs', path: '/programs' },
     { name: 'Impact', path: '/impact' },
+    { name: 'Volunteer', path: '/volunteer' },
     { name: 'Blog', path: '/blog' },
     { name: 'Contact', path: '/contact' },
   ];

@@ -2,6 +2,7 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { Heart, ArrowRight, ShieldCheck } from 'lucide-react';
 import { Link } from 'react-router-dom';
+import verifiedBadge from '../assets/images/verified_badge.png';
 
 const PageHero = ({ title, subtitle, bgImage, showCTA = false }) => {
   const hasImage = Boolean(bgImage);
@@ -17,7 +18,7 @@ const PageHero = ({ title, subtitle, bgImage, showCTA = false }) => {
             className="simple-hero-solo"
           >
             <div className="simple-trust-badge">
-              <ShieldCheck size={16} className="text-primary" /> 
+              <img src={verifiedBadge} alt="Verified NGO" className="badge-img-v2" />
               <span>Verified 80G/12A NGO</span>
             </div>
             <h1 className="simple-hero-title">{title}</h1>
@@ -46,7 +47,8 @@ const PageHero = ({ title, subtitle, bgImage, showCTA = false }) => {
             transition={{ duration: 0.8 }}
           >
             <div className="trust-pill">
-              <ShieldCheck size={14} /> Verified 80G Organization
+              <img src={verifiedBadge} alt="Verified NGO" className="badge-img-v2" />
+              <span>Verified 80G Organization</span>
             </div>
             <h1 className="modern-hero-h1">{title}</h1>
             <p className="modern-hero-p">{subtitle}</p>
@@ -114,6 +116,12 @@ const PageHero = ({ title, subtitle, bgImage, showCTA = false }) => {
           margin-bottom: 24px;
           text-transform: uppercase;
           letter-spacing: 0.5px;
+        }
+
+        .badge-img-v2 {
+          width: 20px;
+          height: 20px;
+          object-fit: contain;
         }
 
         .modern-hero-h1 {

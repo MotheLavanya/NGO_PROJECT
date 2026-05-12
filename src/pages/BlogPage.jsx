@@ -1,6 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { Calendar, User, ArrowRight, Tag } from 'lucide-react';
+import { Calendar, User, ArrowRight, Tag, Mail, CheckCircle2 } from 'lucide-react';
 import AnimatedSection from '../components/AnimatedSection';
 import PageHero from '../components/PageHero';
 
@@ -96,31 +96,35 @@ const BlogPage = () => {
         </div>
       </section>
 
-      <section className="section newsletter-section" style={{ background: 'var(--color-bg-subtle)' }}>
+      <section className="section newsletter-compact-section">
         <div className="container">
-          <div className="newsletter-box glass-card text-center">
+          <div className="compact-newsletter-box glass-card">
             {subscribed ? (
-              <motion.div initial={{ scale: 0.9, opacity: 0 }} animate={{ scale: 1, opacity: 1 }}>
-                <CheckCircle size={48} color="var(--color-success)" style={{ margin: '0 auto 1.5rem' }} />
-                <h2>You're Subscribed!</h2>
-                <p>Thank you for joining our community. You'll receive our next update soon.</p>
-                <button className="btn btn-outline" style={{ marginTop: '1.5rem' }} onClick={() => setSubscribed(false)}>Subscribe Another Email</button>
+              <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="success-inline">
+                <CheckCircle2 size={20} color="var(--color-success)" />
+                <span>Success! You're subscribed to our impact updates.</span>
+                <button className="btn-text-reset" onClick={() => setSubscribed(false)}>Reset</button>
               </motion.div>
             ) : (
-              <>
-                <h2>Subscribe to Our Newsletter</h2>
-                <p className="mb-2">Get monthly updates on our impact and stories from the field directly in your inbox.</p>
-                <form className="newsletter-form" onSubmit={handleSubscribe}>
-                  <input 
-                    type="email" 
-                    placeholder="yourname@example.com" 
-                    required 
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
-                  />
-                  <button className="btn btn-primary" type="submit">Subscribe</button>
+              <div className="newsletter-flex">
+                <div className="newsletter-text-side">
+                  <h3>Stay Impactful</h3>
+                  <p>Get monthly updates directly in your inbox.</p>
+                </div>
+                <form className="newsletter-form-compact" onSubmit={handleSubscribe}>
+                  <div className="input-wrap-compact">
+                    <Mail size={16} className="icon-compact" />
+                    <input 
+                      type="email" 
+                      placeholder="Email address" 
+                      required 
+                      value={email}
+                      onChange={(e) => setEmail(e.target.value)}
+                    />
+                  </div>
+                  <button className="btn-compact" type="submit">Subscribe</button>
                 </form>
-              </>
+              </div>
             )}
           </div>
         </div>
@@ -232,27 +236,115 @@ const BlogPage = () => {
           font-size: 0.95rem;
         }
 
-        .newsletter-box {
-          padding: 4rem;
-          max-width: 800px;
-          margin: 0 auto;
+        .newsletter-compact-section {
+          padding: 60px 0;
+          background: #fafafa;
         }
 
-        .newsletter-form {
+        .compact-newsletter-box {
+          padding: 30px 40px;
+          max-width: 900px;
+          margin: 0 auto;
+          background: white;
+          border-radius: 20px;
+        }
+
+        .newsletter-flex {
           display: flex;
-          gap: 1rem;
-          max-width: 500px;
-          margin: 0 auto;
+          align-items: center;
+          justify-content: space-between;
+          gap: 40px;
         }
 
-        .newsletter-form input {
+        .newsletter-text-side h3 {
+          font-size: 20px;
+          font-weight: 800;
+          margin-bottom: 4px;
+          color: #1e293b;
+        }
+
+        .newsletter-text-side p {
+          font-size: 14px;
+          color: #64748b;
+          margin: 0;
+        }
+
+        .newsletter-form-compact {
+          display: flex;
+          gap: 12px;
           flex: 1;
+          max-width: 450px;
+        }
+
+        .input-wrap-compact {
+          flex: 1;
+          position: relative;
+        }
+
+        .icon-compact {
+          position: absolute;
+          left: 14px;
+          top: 50%;
+          transform: translateY(-50%);
+          color: #94a3b8;
+        }
+
+        .input-wrap-compact input {
+          width: 100%;
+          padding: 12px 12px 12px 40px;
+          border-radius: 12px;
+          border: 1px solid #e2e8f0;
+          font-size: 14px;
+          background: #f8fafc;
+        }
+
+        .btn-compact {
+          padding: 0 24px;
+          background: var(--color-primary);
+          color: white;
+          border: none;
+          border-radius: 12px;
+          font-weight: 700;
+          font-size: 14px;
+          cursor: pointer;
+          transition: all 0.3s ease;
+        }
+
+        .btn-compact:hover {
+          background: #15803d;
+          transform: translateY(-1px);
+        }
+
+        .success-inline {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          gap: 12px;
+          color: #1e293b;
+          font-weight: 600;
+          font-size: 14px;
+        }
+
+        .btn-text-reset {
+          background: none;
+          border: none;
+          color: var(--color-primary);
+          text-decoration: underline;
+          cursor: pointer;
+          padding: 0;
+          margin-left: 8px;
+        }
+
+        @media (max-width: 1024px) {
+          .newsletter-flex { flex-direction: column; text-align: center; gap: 24px; }
+          .newsletter-form-compact { width: 100%; }
         }
 
         @media (max-width: 768px) {
           .blog-grid { grid-template-columns: 1fr; }
-          .newsletter-form { flex-direction: column; }
-          .newsletter-box { padding: 2rem; }
+          .compact-newsletter-box { padding: 30px 20px; }
+          .newsletter-form-compact { flex-direction: column; }
+          .btn-compact { padding: 14px; }
         }
       `}</style>
     </motion.div>

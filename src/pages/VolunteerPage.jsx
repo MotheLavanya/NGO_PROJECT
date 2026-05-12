@@ -4,6 +4,7 @@ import { Users, BookOpen, Heart, MessageSquare, ArrowRight, CheckCircle } from '
 import AnimatedSection from '../components/AnimatedSection';
 import PageHero from '../components/PageHero';
 import heroImg from '../assets/images/hero.png';
+import volunteerHeroImg from '../assets/images/volunteer_hero.png';
 
 const VolunteerPage = () => {
   const opportunities = [
@@ -59,11 +60,11 @@ const VolunteerPage = () => {
       <PageHero 
         title="Join the Movement"
         subtitle="Your time, passion, and skills can change a life. Become a Hope Rise volunteer today and be the difference."
-        bgImage="https://images.unsplash.com/photo-1593113512648-5c7ce1a5470c?auto=format&fit=crop&q=80&w=1600"
+        bgImage={volunteerHeroImg}
         showCTA={false}
       />
 
-      <section className="section">
+      <section className="section compact-section">
         <div className="container grid-2 align-center">
           <AnimatedSection>
             <div className="volunteer-hero-img">
@@ -173,51 +174,63 @@ const VolunteerPage = () => {
       </section>
 
       <style>{`
-        .page-header {
-          padding: 180px 0 100px;
-          text-align: center;
+        .compact-section {
+          padding: 60px 0 !important;
         }
 
-        .header-title {
-          font-size: 3.5rem;
-          margin-bottom: 1rem;
+        .compact-section .section-title {
+          margin-bottom: 12px;
+          font-size: 28px;
         }
 
-        .header-subtitle {
-          font-size: 1.3rem;
-          color: var(--color-text-muted);
+        .compact-section .sub-title {
+          margin-bottom: 8px;
+        }
+
+        .compact-section p {
+          margin-bottom: 20px;
+          font-size: 15px;
         }
 
         .volunteer-hero-img {
           position: relative;
+          max-width: 450px;
+          margin: 0 auto;
         }
 
         .rounded-image {
           width: 100%;
+          height: 320px;
+          object-fit: cover;
           border-radius: var(--radius-xl);
           box-shadow: var(--shadow-xl);
         }
 
         .stat-overlay {
           position: absolute;
-          bottom: 30px;
-          right: -20px;
-          padding: 1.5rem 2rem;
+          bottom: 20px;
+          right: -10px;
+          padding: 1rem 1.5rem;
           text-align: center;
         }
 
         .stat-overlay strong {
           display: block;
-          font-size: 2rem;
+          font-size: 1.5rem;
           color: var(--color-primary);
+        }
+
+        .stat-overlay span {
+          font-size: 12px;
         }
 
         .benefit-list li {
           display: flex;
           align-items: center;
-          gap: 12px;
-          margin-bottom: 1rem;
+          gap: 10px;
+          margin-bottom: 0.6rem;
           font-weight: 500;
+          font-size: 14px;
         }
 
         .opportunity-card {
